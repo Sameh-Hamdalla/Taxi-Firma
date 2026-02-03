@@ -274,3 +274,8 @@ a[href^="mailto"] {
 .hero p {
   text-shadow: 0 2px 6px rgba(0,0,0,0.7);
 }
+h1,h2:hover {
+  color: rgb(170, 38, 38);
+  cursor: pointer;
+  
+}
