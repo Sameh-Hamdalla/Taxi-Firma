@@ -1,51 +1,276 @@
+/* ================= BASE ================= */
 
-body{
+body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background: white;
+  color: #111;
 }
 
-header{
+/* ================= HEADER ================= */
 
-  background: black;
-  color:white;
-  padding: 20px;
-  text-align: center;
-  display: flex; /* Elemente nebeneinander */
+header {
+  background: #000;
+  color: white;
+  padding: 20px 40px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
-footer{
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
+header h1 {
+  margin: 0;
+  font-size: 22px;
 }
 
-button{
-  background: #ffcc00;
-  color: black;
-  border: none;
-  border-radius: 6px;
-  padding: 12px 20px;
-  cursor: pointer;
-}
+/* Navigation */
 
-nav a{
+nav a {
   color: white;
   text-decoration: none;
-  margin: 0 15px;
+  margin: 0 18px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
-nav a:hover{
+nav a:hover {
   color: #ffcc00;
 }
 
+/* ================= BUTTON ================= */
+
+button,
+.call-btn {
+  background: #ffcc00;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+button{
+  font-size: 16px;
+  margin: 10px
+}
+.call-btn {
+  font-size: 14px;
+}
+
+button:hover,
+.call-btn:hover {
+  background: #ffd633;
+}
+
+/* ================= SECTIONS ================= */
+
 section {
-  padding: 60px 20px;
+  padding: 70px 20px;
   text-align: center;
 }
-section:nth-child(even) {
-  background: #f5f5f5;
+
+/* Inhalt zentrieren + Breite begrenzen */
+
+section > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================= HERO ================= */
+
+main section:first-child {
+  /* background: #f8f9fb; */
+  padding: 100px 20px;
+}
+
+main section:first-child h2 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+main section:first-child p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* ================= LEISTUNGEN ================= */
+
+#leistungen li {
+  list-style: none;
+  margin: 12px 0;
+  font-size: 18px;
+}
+
+/* ================= PREISE ================= */
+
+#preise p {
+  background: #f3f4f6;
+  display: inline-block;
+  padding: 12px 18px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+/* ================= VORTEILE ================= */
+
+#vorteile {
+  background: #ffcc00;
+  color: black;
+}
+
+.vorteile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.vorteil {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.icon {
+  font-size: 30px;
+  background: black;
+  color: #ffcc00;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+/* ================= KONTAKT ================= */
+
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 30px;
+}
+
+.kontakt-card {
+  background: #f9fafb;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+  background: #0f172a;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Social Icons */
+
+.socials a {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 22px;
+  text-decoration: none;
+}
+a[href^="mailto"] {
+  color: #0ea5e9;
+  font-weight: 500;
+}
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  /* Header untereinander */
+  header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  /* Navigation umbrechen */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    margin: 6px 10px;
+    font-size: 14px;
+  }
+
+  /* Buttons kleiner */
+  button,
+  .call-btn {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  /* Hero kleiner */
+  main section:first-child {
+    padding: 60px 16px;
+  }
+
+  main section:first-child h2 {
+    font-size: 24px;
+  }
+
+  main section:first-child p {
+    font-size: 16px;
+  }
+
+  /* Vorteile → eine Spalte */
+  .vorteile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Kontakt → eine Spalte */
+  .kontakt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sections weniger Abstand */
+  section {
+    padding: 50px 16px;
+  }
+
+}
+/* ================= HERO IMAGE ================= */
+
+.hero {
+  position: relative;
+  background-image: url("./assets/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 120px 20px;
+}
+
+
+/* dunkles Overlay für Lesbarkeit */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+/* Inhalt über Overlay */
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+.hero h2,
+.hero p {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
 }
