@@ -117,7 +117,7 @@ main section:first-child p {
   border-radius: 18px;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Kinder untereinander */
   align-items: center;     /* horizontal zentrieren */
   justify-content: center; /* vertikal zentrieren */
 
@@ -288,8 +288,21 @@ a[href^="mailto"] {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   color: white;
-  padding: 120px 20px;
+
+  min-height: 80vh;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 40px 20px;
 }
 
 

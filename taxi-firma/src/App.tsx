@@ -48,6 +48,8 @@ function App() {
         {/* HERO BEREICH */}
         <section className="hero">
 
+          <div className="hero-content">
+
           {/* Titel + Untertitel aus translations */}
           <h2>{text.hero.title}</h2>
           <p>{text.hero.sub}</p>
@@ -56,29 +58,94 @@ function App() {
           <a href="tel:00201065112306" className="call-btn">
             {text.hero.button}
           </a>
-
+          </div>
         </section>
 
 
         {/* ================= LEISTUNGEN ================= */}
 
+        {/* **
+        * LeistungenSection Component
+        * --------------------------
+        * Diese Section zeigt alle angebotenen Leistungen als Karten (Cards) an.
+        *
+        * Datenquelle:
+        * Die Texte kommen aus dem Sprach-Objekt `text`.
+        * Dadurch funktioniert Mehrsprachigkeit (DE / EN).
+        *
+        * Aufbau:
+        * - Überschrift aus text.leistungen.title
+        * - Grid-Layout Container
+        * - map() erzeugt automatisch eine Card pro Leistung
+        * */}
+
         <section id="leistungen">
 
-            <h2>{text.leistungen.title}</h2>
+          {/* Section-Titel aus dem Sprachobjekt */}
+          {/* Wird automatisch je nach Sprache ersetzt */}
+          <h2>{text.leistungen.title}</h2>
 
-            <div className="leistungen-grid">
 
-              {text.leistungen.list.map((item, i) => (
-                <div className="card" key={i}>
-                  <div className="icon">🚕</div>
-                  <h3>{item}</h3>
-                 
-                </div>
-              ))}
+          {/* 
+            Grid-Container für die Cards
+            
+            CSS:
+            .leistungen-grid = Grid Layout
+            → Cards stehen nebeneinander
+            → automatisch responsive
+          */}
+          <div className="leistungen-grid">
 
-            </div>
+            {/*
+              map() durchläuft das Array:
+              text.leistungen.list
+
+              Beispiel Array:
+              [
+                "Flughafentransfer",
+                "Stadtfahrten",
+                "Gruppenfahrten"
+              ]
+
+              Für jedes Element wird eine Card erzeugt.
+              
+              Parameter:
+              item = aktueller Textwert
+              i    = Index (Position im Array)
+            */}
+            {text.leistungen.list.map((item, i) => (
+
+              /**
+               * Card Element
+               * ------------
+               * key = eindeutiger React Listen-Key
+               * wichtig für Rendering & Performance
+               */
+              <div className="card" key={i}>
+
+                {/*
+                  Icon Container
+                  - visuelles Symbol
+                  - wird per CSS als Icon-Box formatiert
+                  - aktuell statisch (immer Taxi-Emoji)
+                */}
+                <div className="icon">🚕</div>
+
+
+                {/*
+                  Leistungs-Titel
+                  - Text kommt direkt aus dem Array
+                  - wird als Card-Überschrift angezeigt
+                */}
+                <h3>{item}</h3>
+
+              </div>
+            ))}
+
+          </div>
 
         </section>
+
 
 
         {/* ================= PREISE ================= */}
