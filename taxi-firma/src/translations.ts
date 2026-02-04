@@ -67,7 +67,7 @@ export const translations = {
       list: [
         "Telefon: 0020 106 511 2306",
         "WhatsApp: 0020 106 511 2306",
-        "E-Mail: sa_mh87@outlook.de"
+        "E-Mail: taxiyassinmarsaalam@gmail.com"
       ]
     },
 
@@ -144,7 +144,7 @@ export const translations = {
       list: [
         "Phone: 0020 106 511 2306",
         "WhatsApp: 0020 106 511 2306",
-        "Email: sa_mh87@outlook.de"
+        "Email: taxiyassinmarsaalam@gmail.com"
       ]
     },
 

@@ -232,8 +232,8 @@ function App() {
             <div className="kontakt-card">
               <div className="kontakt-icon">✉️</div>
               <h3>E-Mail</h3>
-             <a href="mailto:sa_mh87@outlook.de?subject=Taxi Anfrage&body=Hallo, i want to book a taxi.">
-              sa_mh87@outlook.de
+             <a href="mailto:taxiyassinmarsaalam@gmail.com?subject=Taxi Anfrage&body=Hallo, i want to book a taxi.">
+              taxiyassinmarsaalam@gmail.com
             </a>
 
             </div>
