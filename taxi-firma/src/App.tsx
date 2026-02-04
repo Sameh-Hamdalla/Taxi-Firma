@@ -35,8 +35,8 @@ function App() {
 
         {/* Sprachumschalter — beim Klick wird State geändert */}
         <div>
-          <button onClick={() => setLang("de")}>DE</button>
-          <button onClick={() => setLang("en")}>EN</button>
+          <button onClick={() => setLang("de")}>Deutsch</button>
+          <button onClick={() => setLang("en")}>Englisch</button>
         </div>
 
       </header>
