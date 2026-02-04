@@ -2,7 +2,7 @@ export const translations = {
 
   de: {
 
-    title: "Taxi Yassin",
+    title: "Taxi Yassin Marsa Alam",
 
     nav: {
       leistungen: "Leistungen",
@@ -19,7 +19,7 @@ export const translations = {
     leistungen: {
       title: "Leistungen",
       list: [
-        "Flughafentransfer Hurghada & Safaga",
+        "Flughafentransfer Hurghada & Marsa Alam",
         "Stadtfahrten Safaga",
         "Gruppenfahrten",
         "Krankenfahrten",
@@ -74,7 +74,7 @@ export const translations = {
 
   en: {
 
-    title: "Taxi Yassin",
+    title: "Taxi Yassin Marsa Alam",
 
     nav: {
       leistungen: "Services",
@@ -91,7 +91,7 @@ export const translations = {
     leistungen: {
       title: "Services",
       list: [
-        "Airport transfer Hurghada & Safaga",
+        "Airport transfer Hurghada & Marsa Alam",
         "City tours Safaga",
         "Group tours",
         "Medical trips",
