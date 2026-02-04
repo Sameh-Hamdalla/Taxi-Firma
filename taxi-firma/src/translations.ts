@@ -92,8 +92,8 @@ export const translations = {
       title: "Services",
       list: [
         "Airport transfer Hurghada & Safaga",
-        "City rides Safaga",
-        "Group rides",
+        "City tours Safaga",
+        "Group tours",
         "Medical trips",
         "24/7 service"
       ]
