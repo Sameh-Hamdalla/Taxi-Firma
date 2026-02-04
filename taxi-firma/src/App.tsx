@@ -217,10 +217,16 @@ function App() {
 
             <div className="kontakt-card">
               <div className="kontakt-icon">📞</div>
-              <h3>Telefon</h3>
-              <a href="tel:00201065112306">
-                0020 106 511 2306
+              <h3>WhatsApp</h3>
+              <a 
+                href="https://wa.me/201065112306" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="call-btn"
+              >
+                Jetzt über WhatsApp schreiben
               </a>
+
             </div>
 
             <div className="kontakt-card">

@@ -63,7 +63,12 @@ export const translations = {
     },
 
     kontakt: {
-      title: "Kontaktieren Sie uns"
+      title: "Kontaktieren Sie uns",
+      list: [
+        "Telefon: 0020 106 511 2306",
+        "WhatsApp: 0020 106 511 2306",
+        "E-Mail: sa_mh87@outlook.de"
+      ]
     },
 
     footer: {
@@ -135,7 +140,12 @@ export const translations = {
     },
 
     kontakt: {
-      title: "Contact us"
+      title: "Contact us",
+      list: [
+        "Phone: 0020 106 511 2306",
+        "WhatsApp: 0020 106 511 2306",
+        "Email: sa_mh87@outlook.de"
+      ]
     },
 
     footer: {
