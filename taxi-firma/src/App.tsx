@@ -55,9 +55,15 @@ function App() {
           <p>{text.hero.sub}</p>
 
           {/* klickbarer Telefon-Link → startet Anruf auf Handy */}
-          <a href="tel:00201065112306" className="call-btn">
-            {text.hero.button}
-          </a>
+            <a 
+              href="https://wa.me/201065112306" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="call-btn"
+            >
+              WhatsApp
+            </a>
+
           </div>
         </section>
 
