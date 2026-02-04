@@ -2,7 +2,7 @@ export const translations = {
 
   de: {
 
-    title: "Taxi Yassin Marsa Alam",
+    title: " Marsa Alam Yassin Taxi ",
 
     nav: {
       leistungen: "Leistungen",
@@ -23,21 +23,21 @@ export const translations = {
         "Stadtfahrten Safaga",
         "Gruppenfahrten",
         "Krankenfahrten",
-        "24/7 Service"
+        "24/7 Service",
+        "Sonderfahrten auf Anfrage"
       ]
     },
 
     preise: {
       title: "Preise",
-      list: [
-        "Grundpreis: 4,50 €",
-        "Pro Kilometer: 2,20 €",
-        "Wartezeit: 30 € / Stunde"
-      ]
-    },
+      line1: "Fahrten sind bereits ab 6 € buchbar.",
+      line2: "Grundpreis 3,50 € + 1,50 € pro Kilometer.",
+      btn: "Preis berechnen & buchen"
+    }
+        ,
 
     vorteile: {
-      title: "Warum Taxi Yassin wählen?",
+      title: "Warum Marsa Alam Yassin Taxi wählen?",
       items: [
         {
           icon: "🛡️",
@@ -61,6 +61,12 @@ export const translations = {
         }
       ]
     },
+    // preiseForm: {
+    //   people: "Anzahl der Personen",
+    //   hotel: "Hotel / Zielort",
+    //   chooseHotel: "Hotel auswählen",
+    //   calc: "Preis berechnen"
+    // },  
 
     kontakt: {
       title: "Kontaktieren Sie uns",
@@ -79,7 +85,7 @@ export const translations = {
 
   en: {
 
-    title: "Taxi Yassin Marsa Alam",
+    title: " Marsa Alam Yassin Taxi ",
 
     nav: {
       leistungen: "Services",
@@ -100,18 +106,18 @@ export const translations = {
         "City tours Safaga",
         "Group tours",
         "Medical trips",
-        "24/7 service"
+        "24/7 service",
+        "Special trips on request"
       ]
     },
 
     preise: {
       title: "Prices",
-      list: [
-        "Base price: €4.50",
-        "Per kilometer: €2.20",
-        "Waiting time: €30 / hour"
-      ]
-    },
+      line1: "Trips are bookable from €6.",
+      line2: "Base fare €3.50 + €1.50 per kilometer.",
+      btn: "Calculate price & book"
+      },
+
 
     vorteile: {
       title: "Why choose Taxi Yassin?",
@@ -138,6 +144,13 @@ export const translations = {
         }
       ]
     },
+
+    // preiseForm: {
+    //   people: "Number of people",
+    //   hotel: "Hotel / destination",
+    //   chooseHotel: "Select hotel",
+    //   calc: "Calculate price"
+    // },
 
     kontakt: {
       title: "Contact us",

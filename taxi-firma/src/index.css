@@ -18,9 +18,12 @@ header {
   align-items: center;
 }
 
+
 header h1 {
   margin: 0;
   font-size: 22px;
+  color: #ffcc00;
+  font-weight: 700;
 }
 
 /* Navigation */
@@ -105,14 +108,14 @@ main section:first-child p {
   padding-top: 20px;
 } */
 
-.leistung-grid {
+.leistungen-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   margin-top: 40px;
 }
 .card {
-  background: #f3f3f3;
+  background:rgba(255,255,255,0.92);
   padding: 30px;
   border-radius: 18px;
 
@@ -303,6 +306,27 @@ a[href^="mailto"] {
 .hero-content {
   max-width: 800px;
   padding: 40px 20px;
+}
+
+.services-area-bg {
+  position: relative;
+  padding: 100px 20px;
+
+  background-image: url("./assets/meer.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.services-area-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.50);
+}
+
+.services-area-bg > section {
+  position: relative;
+  z-index: 1;
 }
 
 

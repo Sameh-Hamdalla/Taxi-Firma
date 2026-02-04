@@ -67,108 +67,117 @@ function App() {
           </div>
         </section>
 
+        <section className="services-area-bg">
+          {/* ================= LEISTUNGEN ================= */}
 
-        {/* ================= LEISTUNGEN ================= */}
+          {/* **
+          * LeistungenSection Component
+          * --------------------------
+          * Diese Section zeigt alle angebotenen Leistungen als Karten (Cards) an.
+          *
+          * Datenquelle:
+          * Die Texte kommen aus dem Sprach-Objekt `text`.
+          * Dadurch funktioniert Mehrsprachigkeit (DE / EN).
+          *
+          * Aufbau:
+          * - Überschrift aus text.leistungen.title
+          * - Grid-Layout Container
+          * - map() erzeugt automatisch eine Card pro Leistung
+          * */}
 
-        {/* **
-        * LeistungenSection Component
-        * --------------------------
-        * Diese Section zeigt alle angebotenen Leistungen als Karten (Cards) an.
-        *
-        * Datenquelle:
-        * Die Texte kommen aus dem Sprach-Objekt `text`.
-        * Dadurch funktioniert Mehrsprachigkeit (DE / EN).
-        *
-        * Aufbau:
-        * - Überschrift aus text.leistungen.title
-        * - Grid-Layout Container
-        * - map() erzeugt automatisch eine Card pro Leistung
-        * */}
+          <section id="leistungen">
 
-        <section id="leistungen">
-
-          {/* Section-Titel aus dem Sprachobjekt */}
-          {/* Wird automatisch je nach Sprache ersetzt */}
-          <h2>{text.leistungen.title}</h2>
+            {/* Section-Titel aus dem Sprachobjekt */}
+            {/* Wird automatisch je nach Sprache ersetzt */}
+            <h2>{text.leistungen.title}</h2>
 
 
-          {/* 
-            Grid-Container für die Cards
-            
-            CSS:
-            .leistungen-grid = Grid Layout
-            → Cards stehen nebeneinander
-            → automatisch responsive
-          */}
-          <div className="leistungen-grid">
-
-            {/*
-              map() durchläuft das Array:
-              text.leistungen.list
-
-              Beispiel Array:
-              [
-                "Flughafentransfer",
-                "Stadtfahrten",
-                "Gruppenfahrten"
-              ]
-
-              Für jedes Element wird eine Card erzeugt.
+            {/* 
+              Grid-Container für die Cards
               
-              Parameter:
-              item = aktueller Textwert
-              i    = Index (Position im Array)
+              CSS:
+              .leistungen-grid = Grid Layout
+              → Cards stehen nebeneinander
+              → automatisch responsive
             */}
-            {text.leistungen.list.map((item, i) => (
+            <div className="leistungen-grid">
 
-              /**
-               * Card Element
-               * ------------
-               * key = eindeutiger React Listen-Key
-               * wichtig für Rendering & Performance
-               */
-              <div className="card" key={i}>
+              {/*
+                map() durchläuft das Array:
+                text.leistungen.list
 
-                {/*
-                  Icon Container
-                  - visuelles Symbol
-                  - wird per CSS als Icon-Box formatiert
-                  - aktuell statisch (immer Taxi-Emoji)
-                */}
-                <div className="icon">🚕</div>
+                Beispiel Array:
+                [
+                  "Flughafentransfer",
+                  "Stadtfahrten",
+                  "Gruppenfahrten"
+                ]
+
+                Für jedes Element wird eine Card erzeugt.
+                
+                Parameter:
+                item = aktueller Textwert
+                i    = Index (Position im Array)
+              */}
+              {text.leistungen.list.map((item, i) => (
+
+                /**
+                 * Card Element
+                 * ------------
+                 * key = eindeutiger React Listen-Key
+                 * wichtig für Rendering & Performance
+                 */
+                <div className="card" key={i}>
+
+                  {/*
+                    Icon Container
+                    - visuelles Symbol
+                    - wird per CSS als Icon-Box formatiert
+                    - aktuell statisch (immer Taxi-Emoji)
+                  */}
+                  <div className="icon">🚕</div>
 
 
-                {/*
-                  Leistungs-Titel
-                  - Text kommt direkt aus dem Array
-                  - wird als Card-Überschrift angezeigt
-                */}
-                <h3>{item}</h3>
+                  {/*
+                    Leistungs-Titel
+                    - Text kommt direkt aus dem Array
+                    - wird als Card-Überschrift angezeigt
+                  */}
+                  <h3>{item}</h3>
 
-              </div>
-            ))}
+                </div>
+              ))}
 
-          </div>
+            </div>
+
+          </section>
+
+          {/* ================= PREISE ================= */}
+          <section id="preise">
+
+            <h2>{text.preise.title}</h2>
+
+            <p>
+              {lang === "de"
+                ? "Fahrten sind bereits ab 6 € buchbar."
+                : "Trips are bookable from €6."}
+            </p>
+
+            <p>
+              {lang === "de"
+                ? "Grundpreis 3,50 € + 1,50 € pro Kilometer."
+                : "Base fare €3.50 + €1.50 per kilometer."}
+            </p>
+
+            <button className="call-btn" onClick={() => alert("Rechner folgt")}>
+              {lang === "de"
+                ? "Preis berechnen & buchen"
+                : "Calculate price & book"}
+            </button>
+
+          </section>
 
         </section>
-
-
-
-        {/* ================= PREISE ================= */}
-        <section id="preise">
-
-          <h2>{text.preise.title}</h2>
-
-          {/*
-            gleiche map-Logik:
-            Liste → mehrere <p> Elemente erzeugen
-          */}
-          {text.preise.list.map(item => (
-            <p key={item}>{item}</p>
-          ))}
-
-        </section>
-
 
         {/* ================= VORTEILE ================= */}
         <section id="vorteile">
