@@ -61,24 +61,22 @@ function App() {
 
 
         {/* ================= LEISTUNGEN ================= */}
+
         <section id="leistungen">
 
-          <h2>{text.leistungen.title}</h2>
+            <h2>{text.leistungen.title}</h2>
 
-          <ul>
-            {/*
-              map bedeutet:
-              → gehe durch jedes Element der Liste
-              → map gibt automatisch:
-                   item = aktuelles Element
-                   i = Position (Index)
-              → baue für jedes Element ein <li>
-            */}
-            {text.leistungen.list.map((item, i) => (
-              // key = eindeutige Kennung für React Listen
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
+            <div className="leistungen-grid">
+
+              {text.leistungen.list.map((item, i) => (
+                <div className="card" key={i}>
+                  <div className="icon">🚕</div>
+                  <h3>{item}</h3>
+                 
+                </div>
+              ))}
+
+            </div>
 
         </section>
 
