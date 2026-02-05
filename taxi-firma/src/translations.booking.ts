@@ -9,7 +9,7 @@ export const bookingTranslations = {
       to: "Nach",
       vehicle: "Fahrzeug",
       hotel: "Hotel",
-      room: "Zimmernummer",
+      room: "Zimmernummer & Flugnummer",
       cancel: "Abbrechen",
       next: "Weiter"
     }
@@ -24,7 +24,7 @@ export const bookingTranslations = {
       to: "To",
       vehicle: "Vehicle",
       hotel: "Hotel",
-      room: "Room number",
+      room: "Room number & flight number",
       cancel: "Cancel",
       next: "Next"
     }
