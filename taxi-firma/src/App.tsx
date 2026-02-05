@@ -1,62 +1,86 @@
-// React Hook importieren → damit React sich Werte merken kann (State)
-import { useState, useEffect } from "react"
+import BookingWizard from "./BookingWizard";
 
-// Übersetzungs-Objekt importieren (Deutsch / Englisch Texte)
-import { translations } from "./translations"
+/**
+ * React Hooks
+ * ----------
+ * useState  → speichert Zustand (State)
+ * useEffect → reagiert auf Lifecycle / Events
+ */
+import { useState, useEffect } from "react";
 
+/**
+ * Übersetzungen (DE / EN)
+ */
+import { translations } from "./translations";
 
 
 function App() {
 
-  // React State:
-  // lang = aktuelle Sprache
-  // setLang = Funktion um Sprache zu ändern
-  // <"de" | "en"> = TypeScript erlaubt nur diese zwei Werte
-  const [lang, setLang] = useState<"de" | "en">("de")
+  /**
+   * ================= STATE =================
+   */
+
+  // Aktuelle Sprache
+  const [lang, setLang] = useState<"de" | "en">("de");
+
+  // Scroll-Top Button sichtbar?
   const [showTopBtn, setShowTopBtn] = useState(false);
 
-  // text enthält alle Texte der aktuell gewählten Sprache
-  // Wenn lang = "de" → deutsche Texte
-  // Wenn lang = "en" → englische Texte
-  const text = translations[lang]
+  // Booking Wizard sichtbar?
+  // false → Formular aus
+  // true  → Formular an
+  const [bookingOpen, setBookingOpen] = useState(false);
 
+  /**
+   * Aktuelle Sprachtexte auswählen
+   */
+  const text = translations[lang];
+
+  /**
+   * ================= SCROLL LISTENER =================
+   * Zeigt den Scroll-nach-oben Button
+   */
   useEffect(() => {
-    // useEffect bedeutet:Mach etwas, nachdem die Komponente gerendert wurde
-  const handleScroll = () => {
-    if (window.scrollY > 300) {
-      setShowTopBtn(true);
-    } else {
-      setShowTopBtn(false);
-    }
-  };
 
-  window.addEventListener("scroll", handleScroll);
-  // Wenn der User scrollt , ruf handleScroll auf
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-    // Aufräumen: entferne den Event Listener, wenn die Komponente entladen wird
-  };
-}, []);
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    };
 
-// das [] bedeutet: dieser Effekt wird nur einmal ausgeführt,
-// wenn die Komponente das erste Mal geladen wird
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup beim Unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+  }, []); // läuft nur einmal beim Start
+
+
+  /**
+   * ================= RENDER =================
+   */
+
   return (
     <div>
 
       {/* ================= HEADER ================= */}
       <header>
 
-        {/* Firmenname aus translations */}
+        {/* Firmenname */}
         <h1>{text.title}</h1>
 
-        {/* Navigation — Texte kommen aus translations */}
+        {/* Navigation */}
         <nav>
           <a href="#leistungen">{text.nav.leistungen}</a>
           <a href="#preise">{text.nav.preise}</a>
           <a href="#kontakt">{text.nav.kontakt}</a>
         </nav>
 
-        {/* Sprachumschalter — beim Klick wird State geändert */}
+        {/* Sprachumschalter */}
         <div>
           <button onClick={() => setLang("de")}>Deutsch</button>
           <button onClick={() => setLang("en")}>Englisch</button>
@@ -68,18 +92,17 @@ function App() {
       {/* ================= MAIN ================= */}
       <main>
 
-        {/* HERO BEREICH */}
+        {/* ================= HERO ================= */}
         <section className="hero">
 
           <div className="hero-content">
 
-          {/* Titel + Untertitel aus translations */}
-          <h2>{text.hero.title}</h2>
-          <p>{text.hero.sub}</p>
+            <h2>{text.hero.title}</h2>
+            <p>{text.hero.sub}</p>
 
-          {/* klickbarer Telefon-Link → startet Anruf auf Handy */}
-            <a 
-              href="https://wa.me/201065112306" 
+            {/* WhatsApp Direktlink */}
+            <a
+              href="https://wa.me/201065112306"
               target="_blank"
               rel="noopener noreferrer"
               className="call-btn"
@@ -90,90 +113,31 @@ function App() {
           </div>
         </section>
 
+
+        {/* ================= SERVICES BACKGROUND ================= */}
         <section className="services-area-bg">
+
           {/* ================= LEISTUNGEN ================= */}
-
-          {/* **
-          * LeistungenSection Component
-          * --------------------------
-          * Diese Section zeigt alle angebotenen Leistungen als Karten (Cards) an.
-          *
-          * Datenquelle:
-          * Die Texte kommen aus dem Sprach-Objekt `text`.
-          * Dadurch funktioniert Mehrsprachigkeit (DE / EN).
-          *
-          * Aufbau:
-          * - Überschrift aus text.leistungen.title
-          * - Grid-Layout Container
-          * - map() erzeugt automatisch eine Card pro Leistung
-          * */}
-
           <section id="leistungen">
 
-            {/* Section-Titel aus dem Sprachobjekt */}
-            {/* Wird automatisch je nach Sprache ersetzt */}
             <h2>{text.leistungen.title}</h2>
 
-
-            {/* 
-              Grid-Container für die Cards
-              
-              CSS:
-              .leistungen-grid = Grid Layout
-              → Cards stehen nebeneinander
-              → automatisch responsive
-            */}
+            {/* Grid Cards */}
             <div className="leistungen-grid">
 
-              {/*
-                map() durchläuft das Array:
-                text.leistungen.list
+              {text.leistungen.list.map((item: string, i: number) => (
 
-                Beispiel Array:
-                [
-                  "Flughafentransfer",
-                  "Stadtfahrten",
-                  "Gruppenfahrten"
-                ]
-
-                Für jedes Element wird eine Card erzeugt.
-                
-                Parameter:
-                item = aktueller Textwert
-                i    = Index (Position im Array)
-              */}
-              {text.leistungen.list.map((item, i) => (
-
-                /**
-                 * Card Element
-                 * ------------
-                 * key = eindeutiger React Listen-Key
-                 * wichtig für Rendering & Performance
-                 */
                 <div className="card" key={i}>
-
-                  {/*
-                    Icon Container
-                    - visuelles Symbol
-                    - wird per CSS als Icon-Box formatiert
-                    - aktuell statisch (immer Taxi-Emoji)
-                  */}
                   <div className="icon">🚕</div>
-
-
-                  {/*
-                    Leistungs-Titel
-                    - Text kommt direkt aus dem Array
-                    - wird als Card-Überschrift angezeigt
-                  */}
                   <h3>{item}</h3>
-
                 </div>
+
               ))}
 
             </div>
 
           </section>
+
 
           {/* ================= PREISE ================= */}
           <section id="preise">
@@ -186,21 +150,35 @@ function App() {
                 : "Trips are bookable from €6."}
             </p>
 
-            {/* <p>
-              {lang === "de"
-                ? "Grundpreis 4,50 € + 1,50 € pro Kilometer."
-                : "Base fare €4.50 + €1.50 per kilometer."}
-            </p> */}
-
-            <button className="call-btn" onClick={() => alert("Rechner folgt")}>
+           
+             {/* * BUTTON → Wizard Toggle
+             * ----------------------
+             * Klick → Formular an/aus
+             * prev => !prev = Toggle
+             * */}
+            <button
+              className="call-btn"
+              onClick={() => setBookingOpen(prev => !prev)}
+            >
               {lang === "de"
                 ? "Preis berechnen & buchen"
                 : "Calculate price & book"}
             </button>
 
+            {/* **
+             * Booking Wizard
+             * --------------
+             * open = bookingOpen steuert Sichtbarkeit
+             * */}
+            <BookingWizard
+              open={bookingOpen}
+              text={text.booking}
+            />
+
           </section>
 
         </section>
+
 
         {/* ================= VORTEILE ================= */}
         <section id="vorteile">
@@ -209,31 +187,17 @@ function App() {
 
           <div className="vorteile-grid">
 
-            {/*
-              items = Array von Objekten
-              jedes Objekt hat:
-                icon
-                title
-                text
-            */}
-            {text.vorteile.items.map(v => (
+            {text.vorteile.items.map(
+              (v: { icon: string; title: string; text?: string }, i: number) => (
 
-              <div className="vorteil" key={v.title}>
+                <div className="vorteil" key={i}>
+                  <div className="icon">{v.icon}</div>
+                  <h3>{v.title}</h3>
+                  {v.text && <p>{v.text}</p>}
+                </div>
 
-                {/* Icon aus Daten */}
-                <div className="icon">{v.icon}</div>
-
-                {/* Titel */}
-                <h3>{v.title}</h3>
-
-                {/*
-                  && bedeutet:
-                  zeige <p> nur wenn Text existiert
-                */}
-                {v.text && <p>{v.text}</p>}
-
-              </div>
-            ))}
+              )
+            )}
 
           </div>
 
@@ -250,23 +214,25 @@ function App() {
             <div className="kontakt-card">
               <div className="kontakt-icon">📞</div>
               <h3>WhatsApp</h3>
-              <a 
-              href="https://wa.me/201065112306" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="call-btn"
-            >
-              {text.kontakt.button}
-            </a>
+
+              <a
+                href="https://wa.me/201065112306"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="call-btn"
+              >
+                {text.kontakt.button}
+              </a>
 
             </div>
 
             <div className="kontakt-card">
               <div className="kontakt-icon">✉️</div>
               <h3>E-Mail</h3>
-             <a href="mailto:taxiyassinmarsaalam@gmail.com?subject=Taxi Anfrage&body=Hallo, i want to book a taxi.">
-              taxiyassinmarsaalam@gmail.com
-            </a>
+
+              <a href="mailto:taxiyassinmarsaalam@gmail.com">
+                taxiyassinmarsaalam@gmail.com
+              </a>
 
             </div>
 
@@ -276,6 +242,8 @@ function App() {
 
       </main>
 
+
+      {/* ================= SCROLL TOP BUTTON ================= */}
       {showTopBtn && (
         <button
           className="scroll-top-btn"
@@ -285,13 +253,12 @@ function App() {
         </button>
       )}
 
+
       {/* ================= FOOTER ================= */}
       <footer>
 
-        {/* Footer Text aus translations */}
         <p>{text.footer.text}</p>
 
-        {/* Social Icons */}
         <div className="socials">
           <a href="#">📘</a>
           <a href="#">📷</a>
@@ -301,7 +268,7 @@ function App() {
       </footer>
 
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

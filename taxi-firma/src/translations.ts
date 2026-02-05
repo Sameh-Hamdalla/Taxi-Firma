@@ -1,8 +1,10 @@
+import { bookingTranslations } from "./translations.booking";
+
 export const translations = {
 
   de: {
 
-    title: " Marsa Alam Yassin Taxi ",
+       title: " Marsa Alam Yassin Taxi ",
 
     nav: {
       leistungen: "Leistungen",
@@ -79,7 +81,8 @@ export const translations = {
 
     footer: {
       text: "© 2026 Taxi Yassin. Alle Rechte vorbehalten."
-    }
+    },
+    booking: bookingTranslations.de.booking
 
   },
 
@@ -163,8 +166,10 @@ export const translations = {
 
     footer: {
       text: "© 2026 Taxi Yassin. All rights reserved."
-    }
+    },
+    booking: bookingTranslations.en.booking
 
   }
 
 }
+
