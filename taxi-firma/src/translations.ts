@@ -13,7 +13,7 @@ export const translations = {
     hero: {
       title: "Ihr zuverlässiger Fahrdienst",
       sub: "24 Stunden – Schnell – Sicher",
-      button: "Jetzt anrufen"
+      button: "Jetzt über WhatsApp schreiben"
     },
 
     leistungen: {
@@ -31,7 +31,7 @@ export const translations = {
     preise: {
       title: "Preise",
       line1: "Fahrten sind bereits ab 6 € buchbar.",
-      line2: "Grundpreis 3,50 € + 1,50 € pro Kilometer.",
+      line2: "Grundpreis 4,50 € + 1,50 € pro Kilometer.",
       btn: "Preis berechnen & buchen"
     }
         ,
@@ -70,8 +70,8 @@ export const translations = {
 
     kontakt: {
       title: "Kontaktieren Sie uns",
+      button: "Jetzt über WhatsApp schreiben",
       list: [
-        "Telefon: 0020 106 511 2306",
         "WhatsApp: 0020 106 511 2306",
         "E-Mail: taxiyassinmarsaalam@gmail.com"
       ]
@@ -96,7 +96,7 @@ export const translations = {
     hero: {
       title: "Your reliable taxi service",
       sub: "24 hours – Fast – Safe",
-      button: "Call now"
+      button: "Write us on WhatsApp"
     },
 
     leistungen: {
@@ -114,7 +114,7 @@ export const translations = {
     preise: {
       title: "Prices",
       line1: "Trips are bookable from €6.",
-      line2: "Base fare €3.50 + €1.50 per kilometer.",
+      line2: "Base fare €4.50 + €1.50 per kilometer.",
       btn: "Calculate price & book"
       },
 
@@ -154,8 +154,8 @@ export const translations = {
 
     kontakt: {
       title: "Contact us",
+      button: "Write us on WhatsApp",
       list: [
-        "Phone: 0020 106 511 2306",
         "WhatsApp: 0020 106 511 2306",
         "Email: taxiyassinmarsaalam@gmail.com"
       ]

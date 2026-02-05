@@ -1,8 +1,10 @@
 // React Hook importieren → damit React sich Werte merken kann (State)
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // Übersetzungs-Objekt importieren (Deutsch / Englisch Texte)
 import { translations } from "./translations"
+
+
 
 function App() {
 
@@ -11,12 +13,33 @@ function App() {
   // setLang = Funktion um Sprache zu ändern
   // <"de" | "en"> = TypeScript erlaubt nur diese zwei Werte
   const [lang, setLang] = useState<"de" | "en">("de")
+  const [showTopBtn, setShowTopBtn] = useState(false);
 
   // text enthält alle Texte der aktuell gewählten Sprache
   // Wenn lang = "de" → deutsche Texte
   // Wenn lang = "en" → englische Texte
   const text = translations[lang]
 
+  useEffect(() => {
+    // useEffect bedeutet:Mach etwas, nachdem die Komponente gerendert wurde
+  const handleScroll = () => {
+    if (window.scrollY > 300) {
+      setShowTopBtn(true);
+    } else {
+      setShowTopBtn(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  // Wenn der User scrollt , ruf handleScroll auf
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    // Aufräumen: entferne den Event Listener, wenn die Komponente entladen wird
+  };
+}, []);
+
+// das [] bedeutet: dieser Effekt wird nur einmal ausgeführt,
+// wenn die Komponente das erste Mal geladen wird
   return (
     <div>
 
@@ -61,7 +84,7 @@ function App() {
               rel="noopener noreferrer"
               className="call-btn"
             >
-              WhatsApp
+              {text.hero.button}
             </a>
 
           </div>
@@ -157,17 +180,17 @@ function App() {
 
             <h2>{text.preise.title}</h2>
 
-            <p>
+            <p className="price-note">
               {lang === "de"
                 ? "Fahrten sind bereits ab 6 € buchbar."
                 : "Trips are bookable from €6."}
             </p>
 
-            <p>
+            {/* <p>
               {lang === "de"
-                ? "Grundpreis 3,50 € + 1,50 € pro Kilometer."
-                : "Base fare €3.50 + €1.50 per kilometer."}
-            </p>
+                ? "Grundpreis 4,50 € + 1,50 € pro Kilometer."
+                : "Base fare €4.50 + €1.50 per kilometer."}
+            </p> */}
 
             <button className="call-btn" onClick={() => alert("Rechner folgt")}>
               {lang === "de"
@@ -228,13 +251,13 @@ function App() {
               <div className="kontakt-icon">📞</div>
               <h3>WhatsApp</h3>
               <a 
-                href="https://wa.me/201065112306" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="call-btn"
-              >
-                Jetzt über WhatsApp schreiben
-              </a>
+              href="https://wa.me/201065112306" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="call-btn"
+            >
+              {text.kontakt.button}
+            </a>
 
             </div>
 
@@ -253,6 +276,14 @@ function App() {
 
       </main>
 
+      {showTopBtn && (
+        <button
+          className="scroll-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          ↑
+        </button>
+      )}
 
       {/* ================= FOOTER ================= */}
       <footer>

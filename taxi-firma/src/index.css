@@ -7,6 +7,18 @@ body {
   color: #111;
 }
 
+section {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+section > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 /* ================= HEADER ================= */
 
 header {
@@ -18,15 +30,12 @@ header {
   align-items: center;
 }
 
-
 header h1 {
   margin: 0;
   font-size: 22px;
   color: #ffcc00;
   font-weight: 700;
 }
-
-/* Navigation */
 
 nav a {
   color: white;
@@ -39,6 +48,7 @@ nav a {
 nav a:hover {
   color: #ffcc00;
 }
+
 
 /* ================= BUTTON ================= */
 
@@ -54,10 +64,12 @@ button,
   text-decoration: none;
   display: inline-block;
 }
-button{
+
+button {
   font-size: 16px;
-  margin: 10px
+  margin: 10px;
 }
+
 .call-btn {
   font-size: 14px;
 }
@@ -67,46 +79,73 @@ button:hover,
   background: #ffd633;
 }
 
-/* ================= SECTIONS ================= */
-
-section {
-  padding: 70px 20px;
-  text-align: center;
-}
-
-/* Inhalt zentrieren + Breite begrenzen */
-
-section > * {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 /* ================= HERO ================= */
 
-main section:first-child {
-  /* background: #f8f9fb; */
+.hero {
+  position: relative;
+  background-image: url("./assets/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 80vh;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 40px 20px;
+}
+
+.hero h2,
+.hero p {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+
+/* ================= SERVICES BACKGROUND ================= */
+
+.services-area-bg {
+  position: relative;
   padding: 100px 20px;
+  background-image: url("./assets/meer.png");
+  background-size: cover;
+  background-position: center;
 }
 
-main section:first-child h2 {
-  font-size: 36px;
-  margin-bottom: 12px;
+.services-area-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.50);
 }
 
-main section:first-child p {
-  font-size: 18px;
-  color: #555;
+.services-area-bg > section {
+  position: relative;
+  z-index: 1;
 }
+
 
 /* ================= LEISTUNGEN ================= */
-
-/* #leistungen li {
-  list-style: none;
-  margin: 12px 0;
-  font-size: 18px;
-  padding-top: 20px;
-} */
 
 .leistungen-grid {
   display: grid;
@@ -114,46 +153,67 @@ main section:first-child p {
   gap: 30px;
   margin-top: 40px;
 }
+
 .card {
-  background:rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.92);
   padding: 30px;
   border-radius: 18px;
 
   display: flex;
-  flex-direction: column; /* Kinder untereinander */
-  align-items: center;     /* horizontal zentrieren */
-  justify-content: center; /* vertikal zentrieren */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   text-align: center;
-
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.25s;
 }
 
-.card:hover{
+.card:hover {
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
   transform: translateY(-6px);
 }
+
+
+/* ================= ICON (einmal definiert!) ================= */
+
 .icon {
-  width: 70px;
+  width: 60px;
   height: 60px;
   background: black;
-  border-radius: 50%;
+  color: #ffcc00;
+  border-radius: 14px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 26px;
-  margin: 0 auto 18px;
+  margin-bottom: 14px;
 }
+
 
 /* ================= PREISE ================= */
 
-#preise p {
+#preise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-note {
   background: #f3f4f6;
   display: inline-block;
   padding: 12px 18px;
-  margin: 8px;
+  margin: 12px 0;
   border-radius: 8px;
+  font-size: 18px;
 }
+
+#preise .call-btn {
+  margin-top: 10px;
+}
+
 
 /* ================= VORTEILE ================= */
 
@@ -175,18 +235,6 @@ main section:first-child p {
   border-radius: 12px;
 }
 
-.icon {
-  font-size: 30px;
-  background: black;
-  color: #ffcc00;
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 14px;
-}
 
 /* ================= KONTAKT ================= */
 
@@ -203,6 +251,7 @@ main section:first-child p {
   border-radius: 12px;
 }
 
+
 /* ================= FOOTER ================= */
 
 footer {
@@ -212,30 +261,65 @@ footer {
   padding: 40px 20px;
 }
 
-/* Social Icons */
-
 .socials a {
   display: inline-block;
   margin: 0 10px;
   font-size: 22px;
   text-decoration: none;
 }
+
 a[href^="mailto"] {
   color: #0ea5e9;
   font-weight: 500;
 }
+
+
+/* ================= TYPO HOVER ================= */
+
+h1:hover,
+h2:hover {
+  color: rgb(170, 38, 38);
+  cursor: pointer;
+}
+
+/* ================= SCROLL BUTTON ================= */
+
+.scroll-top-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+  font-size: 22px;
+
+  background: #ffcc00;
+  color: black;
+  border: none;
+
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+
+  z-index: 999;
+}
+
+.scroll-top-btn:hover {
+  background: #ffd633;
+}
+
+
 /* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
 
-  /* Header untereinander */
   header {
     flex-direction: column;
     gap: 12px;
     padding: 16px;
   }
 
-  /* Navigation umbrechen */
   nav {
     display: flex;
     flex-wrap: wrap;
@@ -247,110 +331,22 @@ a[href^="mailto"] {
     font-size: 14px;
   }
 
-  /* Buttons kleiner */
   button,
   .call-btn {
     padding: 10px 14px;
     font-size: 14px;
   }
 
-  /* Hero kleiner */
-  main section:first-child {
-    padding: 60px 16px;
-  }
-
-  main section:first-child h2 {
-    font-size: 24px;
-  }
-
-  main section:first-child p {
-    font-size: 16px;
-  }
-
-  /* Vorteile → eine Spalte */
   .vorteile-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Kontakt → eine Spalte */
   .kontakt-grid {
     grid-template-columns: 1fr;
   }
 
-  /* Sections weniger Abstand */
   section {
     padding: 50px 16px;
   }
 
-}
-/* ================= HERO IMAGE ================= */
-
-.hero {
-  position: relative;
-  background-image: url("./assets/hero.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  color: white;
-
-  min-height: 80vh;
-  padding: 0 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.hero-content {
-  max-width: 800px;
-  padding: 40px 20px;
-}
-
-.services-area-bg {
-  position: relative;
-  padding: 100px 20px;
-
-  background-image: url("./assets/meer.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.services-area-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.50);
-}
-
-.services-area-bg > section {
-  position: relative;
-  z-index: 1;
-}
-
-
-/* dunkles Overlay für Lesbarkeit */
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.65);
-}
-
-/* Inhalt über Overlay */
-
-.hero > * {
-  position: relative;
-  z-index: 1;
-}
-.hero h2,
-.hero p {
-  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
-}
-h1,h2:hover {
-  color: rgb(170, 38, 38);
-  cursor: pointer;
-  
 }
