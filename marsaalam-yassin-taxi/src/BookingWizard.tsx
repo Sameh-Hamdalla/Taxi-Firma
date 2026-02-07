@@ -1,24 +1,24 @@
+// ================= IMPORTS =================
 
+// Hotelliste aus separater Datei
+// → Array mit allen Hotels / Orten
 import { hotels } from "./hotels";
-import {useState} from "react";
-/**
- * ================= CSS IMPORT =================
- * Lädt die separate Stylesheet-Datei für dieses Formular
- * → betrifft nur BookingWizard Layout & Design
- */
+
+// React Hook für State (Formularwerte merken)
+import { useState } from "react";
+
+// CSS nur für dieses Formular
 import "./BookingWizard.css";
 
 
 /**
  * ================= TYPE: BookingText =================
- * Definiert die Struktur der Texte,
- * die aus translations.booking kommen.
- *
- * Dadurch ist die Komponente mehrsprachig nutzbar.
+ * Struktur der Texte aus translations.booking
+ * → sorgt für Typsicherheit + Mehrsprachigkeit
  */
 type BookingText = {
   title: string;
-  price: string;
+  inquiry: string;
   people: string;
   from: string;
   to: string;
@@ -32,11 +32,10 @@ type BookingText = {
 
 /**
  * ================= TYPE: Props =================
- * Props = Werte, die von App.tsx
- * an diese Komponente übergeben werden.
+ * Werte die App.tsx an diese Komponente schickt
  *
- * open → steuert Sichtbarkeit
- * text → enthält alle Sprachtexte
+ * open → Formular sichtbar oder nicht
+ * text → Sprachtexte
  */
 type Props = {
   open: boolean;
@@ -48,28 +47,36 @@ type Props = {
  * ================= COMPONENT =================
  * BookingWizard
  *
- * Zweck:
- * Mehrstufiges Buchungsformular
- *
- * Wird von App.tsx ein- und ausgeblendet
- * abhängig vom State bookingOpen
+ * Buchungs / Anfrage Formular
+ * wird von App.tsx ein- und ausgeblendet
  */
 export default function BookingWizard({ open, text }: Props) {
 
-  // aktueller Wizard Schritt
-  const [step, setStep] = useState(1);
+  // ================= STATE =================
+  // Hier merkt sich React alle Eingaben des Users
 
-  // Formular Werte
+  // Anzahl Personen
   const [people, setPeople] = useState(1);
+
+  // Startort
   const [from, setFrom] = useState("");
+
+  // Zielort
   const [to, setTo] = useState("");
+
+  // Fahrzeugtyp
   const [vehicle, setVehicle] = useState("");
+
+  // Hotelname (Freitext)
+  const [hotel, setHotel] = useState("");
+
+  // Zimmer / Flugnummer
+  const [roomflight, setRoomflight] = useState("");
+
 
   /**
    * ================= EARLY RETURN =================
-   * Wenn open = false → nichts anzeigen
-   *
-   * React rendert dann NULL
+   * Wenn open = false → nichts rendern
    * → Formular existiert nicht im DOM
    */
   if (!open) return null;
@@ -80,53 +87,49 @@ export default function BookingWizard({ open, text }: Props) {
    */
   return (
 
-    /**
-     * Hauptcontainer des Formulars
-     * CSS-Klasse steuert Layout / Box / Styling
-     */
+    // Hauptcontainer (Box Design per CSS)
     <div className="booking-wizard">
 
 
-      {/* ================= PREIS ANZEIGE =================
-         Wird später dynamisch berechnet
-         aktuell nur Platzhalter
-      */}
+      {/* ================= PREIS (Platzhalter) ================= */}
+      {/* Wird später dynamisch berechnet */}
       <h2>
-        {text.price}: <span className="wizard-price">€ 0.00</span>
+        {text.inquiry} <span className="wizard-price"></span>
       </h2>
 
 
-      {/* ================= PERSONEN =================
-         Anzahl der Fahrgäste
-      */}
+      {/* ================= PERSONEN ================= */}
       <label>{text.people}</label>
 
-      {/* number input mit Minimum = 1 */}
+      {/* Controlled Input:
+         value kommt aus React State
+         onChange aktualisiert State */}
       <input
         type="number"
         min="1"
         value={people}
-        onChange={(e) => setPeople(parseInt(e.target.value) || 1)}
+        onChange={(e) =>
+          setPeople(parseInt(e.target.value) || 1)
+        }
       />
 
 
-      {/* ================= FROM / TO GRID =================
-         Zweispaltiges Layout
-         Start + Ziel
-      */}
+      {/* ================= FROM / TO ================= */}
+      {/* Grid Layout → 2 Spalten */}
       <div className="wizard-grid">
 
         {/* FROM */}
         <div>
           <label>{text.from}</label>
 
-          <select>
-                  {/* <option>Hurghada Airport</option>
-                  <option>Marsa Alam Airport</option>
-                  <option>Safaga</option> */}
-                  {hotels.map((h) => (
-                    <option key={h} value={h}>{h}</option>
-                  ))}
+          {/* Controlled Select */}
+          <select
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+          >
+            {hotels.map((h: string) => (
+              <option key={h} value={h}>{h}</option>
+            ))}
           </select>
         </div>
 
@@ -135,8 +138,12 @@ export default function BookingWizard({ open, text }: Props) {
         <div>
           <label>{text.to}</label>
 
-          <select>
-            {hotels.map((h) => (
+          {/* Controlled Select */}
+          <select
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+          >
+            {hotels.map((h: string) => (
               <option key={h} value={h}>{h}</option>
             ))}
           </select>
@@ -145,45 +152,52 @@ export default function BookingWizard({ open, text }: Props) {
       </div>
 
 
-      {/* ================= FAHRZEUG =================
-         Auswahl Fahrzeugtyp
-      */}
+      {/* ================= VEHICLE ================= */}
       <label>{text.vehicle}</label>
 
-      <select>
-        <option>---</option>
-        <option>Car (1–3)</option>
-        <option>Mini Van (1–8)</option>
-        <option>Bus</option>
+      {/* Controlled Select */}
+      <select
+        value={vehicle}
+        onChange={(e) => setVehicle(e.target.value)}
+      >
+        <option value="">---</option>
+        <option value="Car">Car (1–3)</option>
+        <option value="MiniVan">Mini Van (1–8)</option>
+        <option value="Bus">Bus</option>
       </select>
 
 
-      {/* ================= HOTEL / ZIMMER =================
-         Textfelder für Hotel + Zimmernummer
-      */}
+      {/* ================= HOTEL / ROOM ================= */}
       <div className="wizard-grid">
 
+        {/* Hotel Freitext */}
         <div>
           <label>{text.hotel}</label>
-          <input type="text" />
+          <input
+            type="text"
+            value={hotel}
+            onChange={(e) => setHotel(e.target.value)}
+          />
         </div>
 
+        {/* Zimmer / Flugnummer */}
         <div>
           <label>{text.room}</label>
-          <input type="text" />
+          <input
+            type="text"
+            value={roomflight}
+            onChange={(e) => setRoomflight(e.target.value)}
+          />
         </div>
 
       </div>
 
-
-      {/* ================= ACTION BUTTON =================
-         Nächster Schritt im Wizard
-         → später: Preis berechnen / nächste Seite
-      */}
+      {/* ================= NEXT BUTTON ================= */}
+      {/* Wird später WhatsApp Anfrage senden */}
       <div className="wizard-actions">
 
         <button
-          type="button" // verhindert Form Submit Reload
+          type="button" // verhindert Seiten-Reload
           className="wizard-btn-next"
         >
           {text.next}

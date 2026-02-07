@@ -3,7 +3,7 @@ export const bookingTranslations = {
   de: {
     booking: {
       title: "Buchung",
-      price: "Preis",
+      inquiry: "Anfrage senden",
       people: "Anzahl Personen",
       from: "Von",
       to: "Nach",
@@ -18,7 +18,7 @@ export const bookingTranslations = {
   en: {
     booking: {
       title: "Booking",
-      price: "Price",
+      inquiry: "send an inquiry",
       people: "Number of people",
       from: "From",
       to: "To",
