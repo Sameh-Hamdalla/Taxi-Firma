@@ -70,6 +70,11 @@ function App() {
       {/* ================= HEADER ================= */}
       <header>
 
+        <div className="header-brand">
+          {/* Logo */}
+          <img src="../src/assets/logo.png" alt="Taxi Yassin Marsaalam Logo" />
+        </div>
+        
         {/* Firmenname */}
         <h1>{text.title}</h1>
 

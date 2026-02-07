@@ -17,7 +17,19 @@ section > * {
   margin-left: auto;
   margin-right: auto;
 }
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
+.header-brand img {
+  height: 50px;
+  width: auto;
+}
+
+
+/* ================= HEADER ================= */
 
 /* ================= HEADER ================= */
 
@@ -25,10 +37,12 @@ header {
   background: #000;
   color: white;
   padding: 20px 40px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 
 header h1 {
   margin: 0;
@@ -47,6 +61,23 @@ nav a {
 
 nav a:hover {
   color: #ffcc00;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-brand img {
+  height: 48px;
+  width: auto;
 }
 
 

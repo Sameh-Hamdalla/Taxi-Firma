@@ -59,6 +59,7 @@ type ErrorState = {
   phone?: boolean;
   date?: boolean;
   time?: boolean;
+  sameRoute?: boolean; // optional für speziellen Fehlertext
 };
 
 /**
@@ -122,9 +123,17 @@ export default function BookingWizard({ open, text }: Props) {
     if (!to) e.to = true;
     if (!vehicle) e.vehicle = true;
 
+    // From to Fehler dürfen nicht gleich sein
+    if (from && to && from === to) {
+      e.from = true;
+      e.to = true;
+      e.sameRoute = true; // optional für speziellen Fehlertext
+    }
+
     setErrors(e);
     return Object.keys(e).length === 0;
   };
+
 
 
   /**
@@ -135,7 +144,16 @@ export default function BookingWizard({ open, text }: Props) {
 
     if (!fullname) e.fullname = true;
     if (!phone) e.phone = true;
-    if (!date) e.date = true;
+    if (!date){
+      e.date = true;
+    }else{
+      // Datum darf nicht in der Vergangenheit liegen
+      const today = new Date();
+      const selectedDate = new Date(date);
+      if (selectedDate < today) {
+        e.date = true;
+      }
+    }
     if (!time) e.time = true;
 
     setErrors(e);
@@ -195,6 +213,7 @@ ${text.notes}: ${notes}`;
           <input
             type="number"
             min="1"
+            max="8"
             value={people}
             onChange={e => setPeople(parseInt(e.target.value) || 1)}
           />
@@ -240,15 +259,15 @@ ${text.notes}: ${notes}`;
             }}
           >
             <option value="">---</option>
-            <option>Car</option>
-            <option>MiniVan</option>
-            <option>Bus</option>
+            <option>Car 1-3 Pax</option>
+            <option>MiniVan 1-5 Pax</option>
+            <option>Bus 3-8 Pax</option>
           </select>
           {errors.vehicle && <div className="error-text">Pflichtfeld</div>}
 
           {/* HOTEL */}
           <label>{text.hotel}</label>
-          <input value={hotel} onChange={e => setHotel(e.target.value)} />
+          <input placeholder="Hotel not in the list" value={hotel} onChange={e => setHotel(e.target.value)} />
 
           {/* ROOM */}
           <label>{text.room}</label>
@@ -287,6 +306,8 @@ ${text.notes}: ${notes}`;
           />
           {errors.fullname && <div className="error-text">Pflichtfeld</div>}
 
+          {errors.sameRoute && <div className="error-text">The origin and destination must not be identical.</div>}
+
           <label>{text.phone}</label>
           <input
             className={errors.phone ? "input-error" : ""}
@@ -302,7 +323,17 @@ ${text.notes}: ${notes}`;
             value={date}
             onChange={e => setDate(e.target.value)}
           />
-          {errors.date && <div className="error-text">Pflichtfeld</div>}
+          {errors.date && (
+            <div className="error-text">
+              Date have to be in the future.
+            </div>  
+          )}
+          {errors.date && !date && (
+            <div className="error-text">
+              Pflichtfeld
+            </div>  
+          )}
+
 
           <label>{text.time}</label>
           <input
