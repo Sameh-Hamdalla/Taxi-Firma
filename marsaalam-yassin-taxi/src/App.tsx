@@ -271,12 +271,31 @@ function App() {
         </div>
 
         {/* ================= DEV CREDIT ================= */}
-        <div className="dev-credit">
-          Developed by Sameh Hamdalla — Software Development ·
-          <a href="mailto:sa_mh87@outlook.de">
-            sa_mh87@outlook.de
-          </a>
+
+       
+
+      {/* ================= DEV BADGE ================= */}
+      <div className="dev-badge">
+        <div className="dev-badge-title">
+          Developed by
         </div>
+
+        <div className="dev-badge-name">
+          Sameh Hamdalla
+        </div>
+
+        <div className="dev-badge-role">
+          Software Development
+        </div>
+
+        <a
+          href="mailto:sa_mh87@outlook.de"
+          className="dev-badge-mail"
+        >
+          sa_mh87@outlook.de
+        </a>
+      </div>
+
 
       </footer>
 
