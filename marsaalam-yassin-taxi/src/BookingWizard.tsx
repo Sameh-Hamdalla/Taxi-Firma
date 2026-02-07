@@ -94,7 +94,7 @@ export default function BookingWizard({ open, text }: Props) {
       {/* ================= PREIS (Platzhalter) ================= */}
       {/* Wird später dynamisch berechnet */}
       <h2>
-        {text.inquiry} <span className="wizard-price"></span>
+        {text.inquiry} <span className="wizard-inquiry"></span>
       </h2>
 
 
