@@ -1,23 +1,54 @@
 /* ======================================================
-   TAXI BOOKING WIZARD — MODERN DARK TAXI STYLE
+   TAXI BOOKING WIZARD — MODERN 3D DARK TAXI STYLE
+====================================================== */
+
+
+/* ======================================================
+   3D PANEL CONTAINER
 ====================================================== */
 
 .booking-wizard {
-  background: linear-gradient(180deg, #111 0%, #0b0b0b 100%);
-  color: #ffffff;
+
+  background: linear-gradient(180deg,#1a1a1a,#0e0e0e);
+  color: white;
 
   max-width: 760px;
-  margin: 48px auto;
-  padding: 34px;
+  margin: 50px auto;
+  padding: 36px;
 
-  border-radius: 20px;
-  border: 2px solid #ffcc00;
+  border-radius: 22px;
+  border: 1px solid rgba(255,204,0,0.35);
 
+  /* 3D Depth */
   box-shadow:
-    0 25px 60px rgba(0,0,0,0.6),
+    0 30px 80px rgba(0,0,0,0.55),
+    0 10px 30px rgba(0,0,0,0.35),
     inset 0 1px 0 rgba(255,255,255,0.05);
 
-  animation: wizardFade 0.35s ease;
+  transform: perspective(1200px) rotateX(0deg);
+
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease,
+    border-color .4s ease;
+
+  animation: wizardFade .4s ease;
+}
+
+
+/* Floating Hover Effect */
+
+.booking-wizard:hover {
+  transform:
+    perspective(1200px)
+    translateY(-6px)
+    rotateX(1deg);
+
+  box-shadow:
+    0 45px 120px rgba(0,0,0,0.7),
+    0 20px 50px rgba(0,0,0,0.45);
+
+  border-color: rgba(255,204,0,0.7);
 }
 
 
@@ -26,7 +57,7 @@
 ====================================================== */
 
 .booking-wizard h2 {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-size: 26px;
   font-weight: 800;
   letter-spacing: 0.3px;
@@ -35,7 +66,7 @@
 
 
 /* ======================================================
-   GRID
+   GRID LAYOUT
 ====================================================== */
 
 .wizard-grid {
@@ -66,22 +97,25 @@
 .booking-wizard input,
 .booking-wizard select,
 .booking-wizard textarea {
+
   width: 100%;
-  padding: 13px 14px;
+  padding: 14px;
 
   border-radius: 12px;
   border: 1px solid #2a2a2a;
 
   background: #181818;
   color: white;
-
   font-size: 15px;
 
-  transition: all 0.18s ease;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
+
+  transition: all .18s ease;
 }
 
 
 /* hover */
+
 .booking-wizard input:hover,
 .booking-wizard select:hover,
 .booking-wizard textarea:hover {
@@ -90,20 +124,60 @@
 
 
 /* focus */
+
 .booking-wizard input:focus,
 .booking-wizard select:focus,
 .booking-wizard textarea:focus {
+
   outline: none;
   border-color: #ffcc00;
-  box-shadow: 0 0 0 3px rgba(255,204,0,0.25);
+
+  box-shadow:
+    0 0 0 3px rgba(255,204,0,0.25),
+    inset 0 2px 6px rgba(0,0,0,0.6);
+
   background: #1e1e1e;
 }
 
 
-/* textarea height */
+/* textarea */
+
 .booking-wizard textarea {
   min-height: 90px;
   resize: vertical;
+}
+
+
+/* ======================================================
+   DATE + TIME VISIBILITY FIX
+====================================================== */
+
+.booking-wizard input[type="date"],
+.booking-wizard input[type="time"] {
+
+  background: #202020;
+  border: 1px solid #3a3a3a;
+  cursor: pointer;
+
+  padding-right: 40px;
+}
+
+
+/* hover stronger */
+
+.booking-wizard input[type="date"]:hover,
+.booking-wizard input[type="time"]:hover {
+  background: #262626;
+  border-color: #ffcc00;
+}
+
+
+/* icon brightness */
+
+.booking-wizard input[type="date"]::-webkit-calendar-picker-indicator,
+.booking-wizard input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.9);
+  cursor: pointer;
 }
 
 
@@ -136,37 +210,44 @@
 }
 
 
-/* primary button */
+/* PRIMARY BUTTON (Next / Send) */
+
 .wizard-btn-next {
-  background: linear-gradient(180deg, #ffcc00, #ffb800);
-  color: #000;
+
+  background: linear-gradient(#ffcc00,#ffb300);
+  color: black;
 
   border: none;
-  padding: 14px 24px;
+  padding: 14px 26px;
 
   border-radius: 12px;
   font-weight: 800;
   font-size: 15px;
 
   cursor: pointer;
-  transition: all 0.18s ease;
 
   box-shadow:
-    0 6px 18px rgba(255,204,0,0.35);
+    0 8px 0 #b38a00,
+    0 14px 25px rgba(0,0,0,0.4);
+
+  transition: all .15s ease;
 }
 
 
-/* hover */
-.wizard-btn-next:hover {
-  transform: translateY(-1px);
-  background: linear-gradient(180deg, #ffd633, #ffc400);
+/* press effect */
+
+.wizard-btn-next:active {
+  transform: translateY(4px);
   box-shadow:
-    0 10px 24px rgba(255,204,0,0.45);
+    0 3px 0 #b38a00,
+    0 8px 14px rgba(0,0,0,0.35);
 }
 
 
-/* back button */
+/* BACK BUTTON */
+
 .wizard-actions button:first-child {
+
   background: #242424;
   color: #ddd;
 
@@ -176,7 +257,8 @@
 
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.18s ease;
+
+  transition: all .18s ease;
 }
 
 .wizard-actions button:first-child:hover {
@@ -186,7 +268,7 @@
 
 
 /* ======================================================
-   SMALL HELP TEXT
+   HELP TEXT
 ====================================================== */
 
 .wizard-hint {
@@ -194,51 +276,6 @@
   font-size: 12px;
   color: #888;
 }
-
-/* =========================================
-   DATE + TIME INPUT VISIBILITY FIX
-========================================= */
-
-.booking-wizard input[type="date"],
-.booking-wizard input[type="time"] {
-  background: #202020;
-  border: 1px solid #3a3a3a;
-  color: #fff;
-
-  cursor: pointer;
-}
-
-
-/* Hover deutlicher */
-.booking-wizard input[type="date"]:hover,
-.booking-wizard input[type="time"]:hover {
-  background: #262626;
-  border-color: #ffcc00;
-}
-
-
-/* Kalender / Uhr Icon heller machen */
-.booking-wizard input[type="date"]::-webkit-calendar-picker-indicator,
-.booking-wizard input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1) brightness(1.8);
-  cursor: pointer;
-  opacity: 1;
-}
-
-
-/* Rechts Klick-Zone optisch markieren */
-.booking-wizard input[type="date"],
-.booking-wizard input[type="time"] {
-  padding-right:40x;
-}
-
-
-/* Fokus extra sichtbar */
-.booking-wizard input[type="date"]:focus,
-.booking-wizard input[type="time"]:focus {
-  box-shadow: 0 0 0 3px rgba(255,204,0,0.3);
-}
-
 
 
 /* ======================================================
@@ -255,7 +292,6 @@
     transform: translateY(0);
   }
 }
-
 
 
 /* ======================================================

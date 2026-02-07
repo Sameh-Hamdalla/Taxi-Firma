@@ -270,6 +270,14 @@ function App() {
           <a href="#">🐦</a>
         </div>
 
+        {/* ================= DEV CREDIT ================= */}
+        <div className="dev-credit">
+          Developed by Sameh Hamdalla — Software Development ·
+          <a href="mailto:sa_mh87@outlook.de">
+            sa_mh87@outlook.de
+          </a>
+        </div>
+
       </footer>
 
     </div>
