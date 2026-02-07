@@ -1,4 +1,7 @@
 import BookingWizard from "./BookingWizard";
+import logo from "./assets/logo.png";
+
+
 
 /**
  * React Hooks
@@ -72,7 +75,8 @@ function App() {
 
         <div className="header-brand">
           {/* Logo */}
-          <img src="../src/assets/logo.png" alt="Taxi Yassin Marsaalam Logo" />
+          <img src={logo} alt="Taxi Yassin Marsa Alam Logo" />
+
         </div>
         
         {/* Firmenname */}

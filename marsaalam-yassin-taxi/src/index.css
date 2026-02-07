@@ -495,7 +495,7 @@ footer {
 
 .dev-badge {
   position: fixed;
-  right: 18px;
+  left: 18px;
   bottom: 18px;
 
   background: linear-gradient(180deg,#1a1a1a,#0f0f0f);
