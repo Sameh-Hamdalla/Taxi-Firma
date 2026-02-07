@@ -161,8 +161,8 @@ function App() {
               onClick={() => setBookingOpen(prev => !prev)}
             >
               {lang === "de"
-                ? "Preis berechnen & buchen"
-                : "Calculate price & book"}
+                ? "Preis anfragen & buchen"
+                : "price inquiry & book"}
             </button>
 
             {/* **
