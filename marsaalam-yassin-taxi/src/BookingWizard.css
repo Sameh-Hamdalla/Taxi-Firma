@@ -1,89 +1,285 @@
-/* ================= TAXI BOOKING STYLE ================= */
+/* ======================================================
+   TAXI BOOKING WIZARD — MODERN DARK TAXI STYLE
+====================================================== */
 
 .booking-wizard {
-  background: #111;
-  color: white;
+  background: linear-gradient(180deg, #111 0%, #0b0b0b 100%);
+  color: #ffffff;
 
   max-width: 760px;
-  margin: 40px auto;
-  padding: 30px;
+  margin: 48px auto;
+  padding: 34px;
 
-  border-radius: 18px;
+  border-radius: 20px;
   border: 2px solid #ffcc00;
 
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  animation: wizardFade 0.35s ease;
 }
 
-/* inquiry */
 
-.wizard-inquiry {
-  color: #ffcc00;
+/* ======================================================
+   TITLE
+====================================================== */
+
+.booking-wizard h2 {
+  margin-bottom: 10px;
+  font-size: 26px;
   font-weight: 800;
+  letter-spacing: 0.3px;
+  color: #ffcc00;
 }
 
-/* grid */
+
+/* ======================================================
+   GRID
+====================================================== */
 
 .wizard-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 22px;
 }
 
-/* labels */
+
+/* ======================================================
+   LABELS
+====================================================== */
 
 .booking-wizard label {
   display: block;
   margin-top: 18px;
   margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #d6d6d6;
+}
+
+
+/* ======================================================
+   INPUTS / SELECTS / TEXTAREA
+====================================================== */
+
+.booking-wizard input,
+.booking-wizard select,
+.booking-wizard textarea {
+  width: 100%;
+  padding: 13px 14px;
+
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+
+  background: #181818;
+  color: white;
+
+  font-size: 15px;
+
+  transition: all 0.18s ease;
+}
+
+
+/* hover */
+.booking-wizard input:hover,
+.booking-wizard select:hover,
+.booking-wizard textarea:hover {
+  border-color: #3a3a3a;
+}
+
+
+/* focus */
+.booking-wizard input:focus,
+.booking-wizard select:focus,
+.booking-wizard textarea:focus {
+  outline: none;
+  border-color: #ffcc00;
+  box-shadow: 0 0 0 3px rgba(255,204,0,0.25);
+  background: #1e1e1e;
+}
+
+
+/* textarea height */
+.booking-wizard textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+
+/* ======================================================
+   ERROR STATE
+====================================================== */
+
+.input-error {
+  border: 2px solid #e11d48 !important;
+  background: #1a0f14 !important;
+}
+
+.error-text {
+  color: #e11d48;
+  font-size: 13px;
+  margin-top: 6px;
   font-weight: 600;
 }
 
-/* inputs */
 
-.booking-wizard input,
-.booking-wizard select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-
-  border: 1px solid #333;
-  background: #1c1c1c;
-  color: white;
-}
-
-.booking-wizard input:focus,
-.booking-wizard select:focus {
-  outline: none;
-  border-color: #ffcc00;
-  box-shadow: 0 0 0 2px rgba(255,204,0,0.25);
-}
-
-/* button */
+/* ======================================================
+   BUTTON AREA
+====================================================== */
 
 .wizard-actions {
-  margin-top: 28px;
-  text-align: right;
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
 }
 
-.wizard-btn {
-  background: #ffcc00;
-  color: black;
+
+/* primary button */
+.wizard-btn-next {
+  background: linear-gradient(180deg, #ffcc00, #ffb800);
+  color: #000;
 
   border: none;
-  padding: 12px 22px;
-  border-radius: 10px;
+  padding: 14px 24px;
+
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 15px;
+
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  box-shadow:
+    0 6px 18px rgba(255,204,0,0.35);
+}
+
+
+/* hover */
+.wizard-btn-next:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, #ffd633, #ffc400);
+  box-shadow:
+    0 10px 24px rgba(255,204,0,0.45);
+}
+
+
+/* back button */
+.wizard-actions button:first-child {
+  background: #242424;
+  color: #ddd;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 14px 20px;
+
   font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.wizard-actions button:first-child:hover {
+  background: #2f2f2f;
+  border-color: #444;
+}
+
+
+/* ======================================================
+   SMALL HELP TEXT
+====================================================== */
+
+.wizard-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* =========================================
+   DATE + TIME INPUT VISIBILITY FIX
+========================================= */
+
+.booking-wizard input[type="date"],
+.booking-wizard input[type="time"] {
+  background: #202020;
+  border: 1px solid #3a3a3a;
+  color: #fff;
+
   cursor: pointer;
 }
 
-.wizard-btn:hover {
-  background: #ffd633;
+
+/* Hover deutlicher */
+.booking-wizard input[type="date"]:hover,
+.booking-wizard input[type="time"]:hover {
+  background: #262626;
+  border-color: #ffcc00;
 }
 
-/* mobile */
+
+/* Kalender / Uhr Icon heller machen */
+.booking-wizard input[type="date"]::-webkit-calendar-picker-indicator,
+.booking-wizard input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.8);
+  cursor: pointer;
+  opacity: 1;
+}
+
+
+/* Rechts Klick-Zone optisch markieren */
+.booking-wizard input[type="date"],
+.booking-wizard input[type="time"] {
+  padding-right:40x;
+}
+
+
+/* Fokus extra sichtbar */
+.booking-wizard input[type="date"]:focus,
+.booking-wizard input[type="time"]:focus {
+  box-shadow: 0 0 0 3px rgba(255,204,0,0.3);
+}
+
+
+
+/* ======================================================
+   ANIMATION
+====================================================== */
+
+@keyframes wizardFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
 
 @media (max-width: 720px) {
+
+  .booking-wizard {
+    padding: 22px;
+    margin: 20px;
+  }
+
   .wizard-grid {
     grid-template-columns: 1fr;
   }
+
+  .wizard-actions {
+    flex-direction: column;
+  }
+
+  .wizard-btn-next,
+  .wizard-actions button {
+    width: 100%;
+  }
+
 }

@@ -1,23 +1,21 @@
 // ================= IMPORTS =================
 
-// Hotelliste aus separater Datei
-// → Array mit allen Hotels / Orten
+// Hotelliste (separate Datei)
 import { hotels } from "./hotels";
 
-// React Hook für State (Formularwerte merken)
+// React State Hook
 import { useState } from "react";
 
-// CSS nur für dieses Formular
+// CSS nur für Wizard
 import "./BookingWizard.css";
 
 
 /**
- * ================= TYPE: BookingText =================
- * Struktur der Texte aus translations.booking
- * → sorgt für Typsicherheit + Mehrsprachigkeit
+ * ================= TEXT TYPE =================
+ * Texte kommen aus translations.booking
+ * → mehrsprachig
  */
 type BookingText = {
-  title: string;
   inquiry: string;
   people: string;
   from: string;
@@ -25,187 +23,320 @@ type BookingText = {
   vehicle: string;
   hotel: string;
   room: string;
-  cancel: string;
+
+  customerData: string;
+  fullname: string;
+  phone: string;
+  date: string;
+  time: string;
+  country: string;
+  email: string;
+  notes: string;
+
   next: string;
+  back: string;
+  send: string;
 };
 
 
 /**
- * ================= TYPE: Props =================
- * Werte die App.tsx an diese Komponente schickt
- *
- * open → Formular sichtbar oder nicht
- * text → Sprachtexte
+ * ================= PROPS =================
  */
 type Props = {
   open: boolean;
   text: BookingText;
 };
 
+/**
+ * ================= ERROR STATE TYPE =================
+ * Speichert welche Pflichtfelder Fehler haben
+ */
+type ErrorState = {
+  from?: boolean;
+  to?: boolean;
+  vehicle?: boolean;
+  fullname?: boolean;
+  phone?: boolean;
+  date?: boolean;
+  time?: boolean;
+};
 
 /**
- * ================= COMPONENT =================
- * BookingWizard
+ * =========================================================
+ * BOOKING WIZARD COMPONENT
+ * =========================================================
  *
- * Buchungs / Anfrage Formular
- * wird von App.tsx ein- und ausgeblendet
+ * Step 1 → Fahrt Daten
+ * Step 2 → Kunden Daten
+ *
+ * Pflichtfelder werden:
+ * - geprüft
+ * - rot markiert
+ * - mit Text angezeigt
+ *
+ * Final → WhatsApp wird geöffnet
  */
 export default function BookingWizard({ open, text }: Props) {
 
-  // ================= STATE =================
-  // Hier merkt sich React alle Eingaben des Users
+  // ---------- Sichtbarkeit ----------
+ 
+  // ---------- Step Steuerung ----------
+  const [step, setStep] = useState(1);
 
-  // Anzahl Personen
+  // =====================================================
+  // STEP 1 STATE
+  // =====================================================
   const [people, setPeople] = useState(1);
-
-  // Startort
   const [from, setFrom] = useState("");
-
-  // Zielort
   const [to, setTo] = useState("");
-
-  // Fahrzeugtyp
   const [vehicle, setVehicle] = useState("");
-
-  // Hotelname (Freitext)
   const [hotel, setHotel] = useState("");
-
-  // Zimmer / Flugnummer
   const [roomflight, setRoomflight] = useState("");
 
+  // =====================================================
+  // STEP 2 STATE
+  // =====================================================
+  const [fullname, setFullname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [country, setCountry] = useState("");
+  const [email, setEmail] = useState("");
+  const [notes, setNotes] = useState("");
 
-  /**
-   * ================= EARLY RETURN =================
-   * Wenn open = false → nichts rendern
-   * → Formular existiert nicht im DOM
-   */
+  // =====================================================
+  // ERROR STATE (für rote Markierung)
+  // =====================================================
+  const [errors, setErrors] = useState<ErrorState>({});
+
   if (!open) return null;
 
 
   /**
-   * ================= RENDER =================
+   * ================= STEP 1 VALIDATION =================
    */
+  const validateStep1 = () => {
+    const e: ErrorState = {};
+
+    if (!from) e.from = true;
+    if (!to) e.to = true;
+    if (!vehicle) e.vehicle = true;
+
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+
+  /**
+   * ================= STEP 2 VALIDATION =================
+   */
+  const validateStep2 = () => {
+    const e: ErrorState = {};
+
+    if (!fullname) e.fullname = true;
+    if (!phone) e.phone = true;
+    if (!date) e.date = true;
+    if (!time) e.time = true;
+
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+
+  /**
+   * ================= WHATSAPP SEND =================
+   */
+  const sendWhatsApp = () => {
+
+    if (!validateStep2()) return;
+
+    const message =
+`*${text.inquiry}*
+
+${text.people}: ${people}
+${text.from}: ${from}
+${text.to}: ${to}
+${text.vehicle}: ${vehicle}
+${text.hotel}: ${hotel}
+${text.room}: ${roomflight}
+
+${text.fullname}: ${fullname}
+${text.phone}: ${phone}
+${text.date}: ${date}
+${text.time}: ${time}
+${text.country}: ${country}
+${text.email}: ${email}
+${text.notes}: ${notes}`;
+
+    const url =
+      `https://wa.me/201065112306?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+  };
+
+
+
+  // =====================================================
+  // RENDER
+  // =====================================================
   return (
+    <>
 
-    // Hauptcontainer (Box Design per CSS)
-    <div className="booking-wizard">
+      {/* =====================================================
+         STEP 1 — FAHRT DATEN
+      ===================================================== */}
+      {step === 1 && (
+        <div className="booking-wizard">
 
+          <h2>{text.inquiry}</h2>
 
-      {/* ================= PREIS (Platzhalter) ================= */}
-      {/* Wird später dynamisch berechnet */}
-      <h2>
-        {text.inquiry} <span className="wizard-inquiry"></span>
-      </h2>
+          {/* PEOPLE */}
+          <label>{text.people}</label>
+          <input
+            type="number"
+            min="1"
+            value={people}
+            onChange={e => setPeople(parseInt(e.target.value) || 1)}
+          />
 
-
-      {/* ================= PERSONEN ================= */}
-      <label>{text.people}</label>
-
-      {/* Controlled Input:
-         value kommt aus React State
-         onChange aktualisiert State */}
-      <input
-        type="number"
-        min="1"
-        value={people}
-        onChange={(e) =>
-          setPeople(parseInt(e.target.value) || 1)
-        }
-      />
-
-
-      {/* ================= FROM / TO ================= */}
-      {/* Grid Layout → 2 Spalten */}
-      <div className="wizard-grid">
-
-        {/* FROM */}
-        <div>
+          {/* FROM */}
           <label>{text.from}</label>
-
-          {/* Controlled Select */}
           <select
             value={from}
-            onChange={(e) => setFrom(e.target.value)}
+            className={errors.from ? "input-error" : ""}
+            onChange={e => {
+              setFrom(e.target.value);
+              setErrors(prev => ({...prev, from: false}));
+            }}
           >
-            {hotels.map((h: string) => (
-              <option key={h} value={h}>{h}</option>
-            ))}
+            <option value="">-- auswählen --</option>
+            {hotels.map(h => <option key={h}>{h}</option>)}
           </select>
-        </div>
+          {errors.from && <div className="error-text">Pflichtfeld</div>}
 
-
-        {/* TO */}
-        <div>
+          {/* TO */}
           <label>{text.to}</label>
-
-          {/* Controlled Select */}
           <select
             value={to}
-            onChange={(e) => setTo(e.target.value)}
+            className={errors.to ? "input-error" : ""}
+            onChange={e => {
+              setTo(e.target.value);
+              setErrors(prev => ({...prev, to: false}));
+            }}
           >
-            {hotels.map((h: string) => (
-              <option key={h} value={h}>{h}</option>
-            ))}
+            <option value="">-- auswählen --</option>
+            {hotels.map(h => <option key={h}>{h}</option>)}
           </select>
-        </div>
+          {errors.to && <div className="error-text">Pflichtfeld</div>}
 
-      </div>
+          {/* VEHICLE */}
+          <label>{text.vehicle}</label>
+          <select
+            value={vehicle}
+            className={errors.vehicle ? "input-error" : ""}
+            onChange={e => {
+              setVehicle(e.target.value);
+              setErrors(prev => ({...prev, vehicle: false}));
+            }}
+          >
+            <option value="">---</option>
+            <option>Car</option>
+            <option>MiniVan</option>
+            <option>Bus</option>
+          </select>
+          {errors.vehicle && <div className="error-text">Pflichtfeld</div>}
 
-
-      {/* ================= VEHICLE ================= */}
-      <label>{text.vehicle}</label>
-
-      {/* Controlled Select */}
-      <select
-        value={vehicle}
-        onChange={(e) => setVehicle(e.target.value)}
-      >
-        <option value="">---</option>
-        <option value="Car">Car (1–3)</option>
-        <option value="MiniVan">Mini Van (1–8)</option>
-        <option value="Bus">Bus</option>
-      </select>
-
-
-      {/* ================= HOTEL / ROOM ================= */}
-      <div className="wizard-grid">
-
-        {/* Hotel Freitext */}
-        <div>
+          {/* HOTEL */}
           <label>{text.hotel}</label>
-          <input
-            type="text"
-            value={hotel}
-            onChange={(e) => setHotel(e.target.value)}
-          />
-        </div>
+          <input value={hotel} onChange={e => setHotel(e.target.value)} />
 
-        {/* Zimmer / Flugnummer */}
-        <div>
+          {/* ROOM */}
           <label>{text.room}</label>
-          <input
-            type="text"
-            value={roomflight}
-            onChange={(e) => setRoomflight(e.target.value)}
-          />
+          <input value={roomflight} onChange={e => setRoomflight(e.target.value)} />
+
+          {/* NEXT */}
+          <div className="wizard-actions">
+            <button
+              className="wizard-btn-next"
+              onClick={() => {
+                if (validateStep1()) setStep(2);
+              }}
+            >
+              {text.next}
+            </button>
+          </div>
+
         </div>
-
-      </div>
-
-      {/* ================= NEXT BUTTON ================= */}
-      {/* Wird später WhatsApp Anfrage senden */}
-      <div className="wizard-actions">
-
-        <button
-          type="button" // verhindert Seiten-Reload
-          className="wizard-btn-next"
-        >
-          {text.next}
-        </button>
-
-      </div>
+      )}
 
 
-    </div>
+
+      {/* =====================================================
+         STEP 2 — CUSTOMER DATA
+      ===================================================== */}
+      {step === 2 && (
+        <div className="booking-wizard">
+
+          <h2>{text.customerData}</h2>
+
+          <label>{text.fullname}</label>
+          <input
+            className={errors.fullname ? "input-error" : ""}
+            value={fullname}
+            onChange={e => setFullname(e.target.value)}
+          />
+          {errors.fullname && <div className="error-text">Pflichtfeld</div>}
+
+          <label>{text.phone}</label>
+          <input
+            className={errors.phone ? "input-error" : ""}
+            value={phone}
+            onChange={e => setPhone(e.target.value)}
+          />
+          {errors.phone && <div className="error-text">Pflichtfeld</div>}
+
+          <label>{text.date}</label>
+          <input
+            type="date"
+            className={errors.date ? "input-error" : ""}
+            value={date}
+            onChange={e => setDate(e.target.value)}
+          />
+          {errors.date && <div className="error-text">Pflichtfeld</div>}
+
+          <label>{text.time}</label>
+          <input
+            type="time"
+            className={errors.time ? "input-error" : ""}
+            value={time}
+            onChange={e => setTime(e.target.value)}
+          />
+          {errors.time && <div className="error-text">Pflichtfeld</div>}
+
+          <label>{text.country}</label>
+          <input value={country} onChange={e => setCountry(e.target.value)} />
+
+          <label>{text.email}</label>
+          <input value={email} onChange={e => setEmail(e.target.value)} />
+
+          <label>{text.notes}</label>
+          <textarea value={notes} onChange={e => setNotes(e.target.value)} />
+
+          <div className="wizard-actions">
+
+            <button onClick={() => setStep(1)}>
+              {text.back}
+            </button>
+
+            <button onClick={sendWhatsApp}>
+              {text.send}
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+    </>
   );
 }
