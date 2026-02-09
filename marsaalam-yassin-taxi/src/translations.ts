@@ -34,7 +34,7 @@ export const translations = {
       title: "Preise",
       line1: "Fahrten sind bereits ab 6 € buchbar.",
       line2: "Grundpreis 4,50 € + 1,50 € pro Kilometer.",
-      btn: "Preis berechnen & buchen"
+      btn: "Preis anfragen & buchen"
     }
         ,
 

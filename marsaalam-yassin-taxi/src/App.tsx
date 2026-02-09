@@ -68,7 +68,7 @@ function App() {
    */
 
   return (
-    <div>
+    <>
 
       {/* ================= HEADER ================= */}
       <header>
@@ -273,37 +273,22 @@ function App() {
           <a href="#">📷</a>
           <a href="#">🐦</a>
         </div>
+    
+      </footer>
+      {/* ================= DEV BADGE ================= */}  
 
-        {/* ================= DEV CREDIT ================= */}
+      {/* DEV BADGE FIXED */}
+      <div className="dev-fixed">
+        <div className="dev-fixed-title">Developed by</div>
+        <div className="dev-fixed-name">Sameh Hamdalla</div>
+        <div className="dev-fixed-role">Software Development</div>
 
-       
-
-      {/* ================= DEV BADGE ================= */}
-      <div className="dev-badge">
-        <div className="dev-badge-title">
-          Developed by
-        </div>
-
-        <div className="dev-badge-name">
-          Sameh Hamdalla
-        </div>
-
-        <div className="dev-badge-role">
-          Software Development
-        </div>
-
-        <a
-          href="mailto:sa_mh87@outlook.de"
-          className="dev-badge-mail"
-        >
+        <a href="mailto:sa_mh87@outlook.de" className="dev-fixed-mail">
           sa_mh87@outlook.de
         </a>
-      </div>
+      </div>   
 
-
-      </footer>
-
-    </div>
+    </>
   );
 }
 
