@@ -20,7 +20,10 @@ section > * {
   margin-right: auto;
 }
 
+.lang-switcher button {
+  margin-right: 10px;
 
+}
 
 /* ======================================================
    HEADER

@@ -90,7 +90,7 @@ function App() {
         </nav>
 
         {/* Sprachumschalter */}
-        <div>
+        <div className="lang-switcher">
           <button onClick={() => setLang("de")}>Deutsch</button>
           <button onClick={() => setLang("en")}>Englisch</button>
         </div>
