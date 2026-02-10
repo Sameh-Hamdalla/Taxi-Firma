@@ -452,6 +452,8 @@ footer {
 
   cursor: pointer;
   border: none;
+  z-index: 9999; 
+  /* bestimmt welches Element über anderen liegt, 9999 bedeutet leg dieses Element ganz vorne */
 }
 
 .scroll-top-btn:active {
