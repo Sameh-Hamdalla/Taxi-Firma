@@ -77,7 +77,7 @@ type ErrorState = {
  *
  * Final → WhatsApp wird geöffnet
  */
-export default function BookingWizard({ open, text }: Props) {
+export default function BookingWizard({  text }: Props) {
 
   // ---------- Sichtbarkeit ----------
  
@@ -110,7 +110,7 @@ export default function BookingWizard({ open, text }: Props) {
   // =====================================================
   const [errors, setErrors] = useState<ErrorState>({});
 
-  if (!open) return null;
+  // if (!open) return null;
 
 
   /**
@@ -210,13 +210,33 @@ ${text.notes}: ${notes}`;
 
           {/* PEOPLE */}
           <label>{text.people}</label>
-          <input
-            type="number"
-            min="1"
-            max="8"
-            value={people}
-            onChange={e => setPeople(parseInt(e.target.value) || 1)}
-          />
+
+            <div className="people-input">
+              <button
+                type="button"
+                onClick={() => setPeople(p => Math.max(1, p - 1))}
+              >
+                −
+              </button>
+
+              <input
+                type="number"
+                min={1}
+                max={10}
+                value={people}
+                onChange={(e) =>
+                  setPeople(Math.min(10, Math.max(1, parseInt(e.target.value, 10) || 1)))
+                }
+              />
+
+              <button
+                type="button"
+                onClick={() => setPeople(p => Math.min(10, p + 1))}
+              >
+                +
+              </button>
+            </div>
+
 
           {/* FROM */}
           <label>{text.from}</label>
@@ -228,7 +248,7 @@ ${text.notes}: ${notes}`;
               setErrors(prev => ({...prev, from: false}));
             }}
           >
-            <option value="">-- auswählen --</option>
+            <option value="">Bitte wählen / Please choose</option>
             {hotels.map(h => <option key={h}>{h}</option>)}
           </select>
           {errors.from && <div className="error-text">Pflichtfeld</div>}
@@ -243,7 +263,7 @@ ${text.notes}: ${notes}`;
               setErrors(prev => ({...prev, to: false}));
             }}
           >
-            <option value="">-- auswählen --</option>
+            <option value="">Bitte wählen / Please choose</option>
             {hotels.map(h => <option key={h}>{h}</option>)}
           </select>
           {errors.to && <div className="error-text">Pflichtfeld</div>}
