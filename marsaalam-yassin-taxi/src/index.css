@@ -1,269 +1,286 @@
 /* ======================================================
-   BASE LAYOUT
-====================================================== */
+   TAXI YASSIN — GLOBAL STYLES
+   Refactored: CSS-Variablen, konsistente Struktur,
+   verbesserte Performance & Responsiveness
+   ====================================================== */
+
+/* ------------------------------------------------------
+   1. DESIGN TOKENS (CSS Custom Properties)
+   ------------------------------------------------------ */
+:root {
+  /* Brand-Farben */
+  --color-brand: #ffcc00;
+  --color-brand-light: #ffd633;
+  --color-brand-dark: #ffb300;
+  --color-brand-shadow: #b38a00;
+
+  /* Neutrale Farben */
+  --color-black: #000;
+  --color-white: #fff;
+  --color-text: #111;
+  --color-text-muted: #cbd5e1;
+  --color-bg-light: #f9fafb;
+  --color-bg-gray: #f3f4f6;
+
+  /* Footer & Dark UI */
+  --color-dark-bg: #0f172a;
+  --color-dark-surface: #1a1a1a;
+
+  /* Schatten */
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.28);
+  --shadow-btn: 0 6px 0 var(--color-brand-shadow), 0 12px 18px rgba(0, 0, 0, 0.25);
+  --shadow-btn-active: 0 2px 0 var(--color-brand-shadow), 0 6px 12px rgba(0, 0, 0, 0.25);
+
+  /* Abstände */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 30px;
+  --space-3xl: 40px;
+  --space-4xl: 70px;
+
+  /* Radii */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  /* Transition */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.35s ease;
+
+  /* Layout */
+  --content-max-width: 900px;
+  --header-height: 80px;
+}
+
+/* ------------------------------------------------------
+   2. RESET & BASE
+   ------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: white;
-  color: #111;
+  background: var(--color-white);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-section {
-  padding: 70px 20px;
-  text-align: center;
-}
-
+/* Zentrierte Content-Box in Sections */
 section > * {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
 }
 
-.lang-switcher button {
-  margin-right: 10px;
-
-}
-
-/* ======================================================
-   HEADER
-====================================================== */
-
-header {
-  background: #000;
-  color: white;
-  padding: 20px 40px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ======================================================
-   HEADINGS — 3D HOVER EFFECT
-====================================================== */
-
-h1, h2, h3 {
+/* ------------------------------------------------------
+   3. TYPOGRAPHY — 3D Hover Effect
+   ------------------------------------------------------ */
+h1,
+h2,
+h3 {
   transition:
-    transform .25s ease,
-    color .25s ease,
-    text-shadow .25s ease;
+    transform var(--transition-base),
+    color var(--transition-base),
+    text-shadow var(--transition-base);
   cursor: pointer;
 }
-
-
-/* ---------- HOVER EFFECT ---------- */
 
 h1:hover,
 h2:hover,
 h3:hover {
-
-  /* leichter Lift */
+  /* Leichter Lift + Taxi-Gelb */
   transform: translateY(-2px) scale(1.03);
-
-  /* Taxi Gelb */
-  color: #ffcc00;
-
-  /* Glow */
-  text-shadow:
-    0 4px 14px rgba(255,204,0,0.45);
+  color: var(--color-brand);
+  text-shadow: 0 4px 14px rgba(255, 204, 0, 0.45);
 }
 
+/* Spezifischere Hover-Intensitäten */
 section > h2:hover {
   transform: translateY(-3px) scale(1.04);
-  color: #ffcc00;
 }
 
 .card h3:hover {
   transform: scale(1.05);
-  color: #ffcc00;
 }
 
-/* ---------- BRAND (Logo + Title) ---------- */
+/* ------------------------------------------------------
+   4. HEADER
+   ------------------------------------------------------ */
+header {
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: var(--space-lg) var(--space-3xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
 
+/* Brand (Logo + Titel) */
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-sm);
 }
-
-
-/* Logo 3D Hover */
 
 .header-brand img {
   height: 50px;
   width: auto;
-
   transition:
-    transform .35s ease,
-    filter .35s ease;
+    transform var(--transition-slow),
+    filter var(--transition-slow);
 }
 
+/* 3D Logo Hover */
 .header-brand img:hover {
-  transform:
-    rotateY(18deg)
-    rotateX(6deg)
-    scale(1.08);
-
-  filter: drop-shadow(0 8px 18px rgba(255,204,0,0.45));
+  transform: rotateY(18deg) rotateX(6deg) scale(1.08);
+  filter: drop-shadow(0 8px 18px rgba(255, 204, 0, 0.45));
 }
-
-
-/* Title */
 
 header h1 {
   margin: 0;
   font-size: 22px;
-  color: #ffcc00;
+  color: var(--color-brand);
   font-weight: 800;
 }
 
-
-/* ---------- NAV ---------- */
+/* Navigation */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
 
 nav a {
-  color: white;
+  color: var(--color-white);
   text-decoration: none;
-  margin: 0 18px;
   font-size: 15px;
   font-weight: 500;
   position: relative;
+  padding-bottom: 2px;
 }
 
-/* underline glow effect */
-
+/* Underline-Glow-Effekt */
 nav a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -6px;
+  bottom: -4px;
   width: 0;
   height: 2px;
-  background: #ffcc00;
-  transition: width .25s ease;
+  background: var(--color-brand);
+  transition: width var(--transition-base);
 }
 
 nav a:hover {
-  color: #ffcc00;
+  color: var(--color-brand);
 }
 
 nav a:hover::after {
   width: 100%;
 }
 
+/* Sprachumschalter */
+.lang-switcher {
+  display: flex;
+  gap: var(--space-sm);
+}
 
-/* ======================================================
-   BUTTONS GLOBAL
-====================================================== */
-
+/* ------------------------------------------------------
+   5. BUTTONS (Global)
+   ------------------------------------------------------ */
 button,
 .call-btn {
-
-  background: linear-gradient(#ffcc00,#ffb300);
-  color: black;
-
+  background: linear-gradient(var(--color-brand), var(--color-brand-dark));
+  color: var(--color-black);
   border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
-
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-lg);
   cursor: pointer;
   font-weight: 700;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 50px;
-
-  box-shadow:
-    0 6px 0 #b38a00,
-    0 12px 18px rgba(0,0,0,0.25);
-
-  transition: all .15s ease;
+  box-shadow: var(--shadow-btn);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
+button:hover,
+.call-btn:hover {
+  background: linear-gradient(var(--color-brand-light), var(--color-brand));
+}
 
 button:active,
 .call-btn:active {
   transform: translateY(4px);
-  box-shadow:
-    0 2px 0 #b38a00,
-    0 6px 12px rgba(0,0,0,0.25);
+  box-shadow: var(--shadow-btn-active);
 }
 
-
-button:hover,
-.call-btn:hover {
-  background: linear-gradient(#ffd633,#ffc400);
-}
-
-
-/* ======================================================
-   HERO — 3D PARALLAX STYLE
-====================================================== */
-
+/* ------------------------------------------------------
+   6. HERO
+   ------------------------------------------------------ */
 .hero {
-
   position: relative;
-
-  background-image: url("./assets/hero.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-
+  background: url("./assets/hero.jpg") center / cover no-repeat;
   min-height: 80vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--color-white);
 }
 
-
-/* dark overlay */
-
+/* Dunkles Overlay für bessere Lesbarkeit */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   max-width: 800px;
-  padding: 40px 20px;
+  padding: var(--space-3xl) var(--space-lg);
 }
-
-
-/* text glow */
 
 .hero h2,
 .hero p {
-  text-shadow: 0 4px 14px rgba(0,0,0,0.7);
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
 }
 
-
-/* ======================================================
-   SERVICES BACKGROUND AREA
-====================================================== */
-
+/* ------------------------------------------------------
+   7. SERVICES AREA (Hintergrundbild)
+   ------------------------------------------------------ */
 .services-area-bg {
   position: relative;
-  padding: 100px 20px;
-
-  background-image: url("./assets/meer.png");
-  background-size: cover;
-  background-position: center;
+  padding: 100px var(--space-lg);
+  background: url("./assets/meer.png") center / cover no-repeat;
 }
 
 .services-area-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.55);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .services-area-bg > section {
@@ -271,44 +288,33 @@ button:hover,
   z-index: 1;
 }
 
-
-/* ======================================================
-   SERVICES GRID
-====================================================== */
-
+/* ------------------------------------------------------
+   8. SERVICES GRID
+   ------------------------------------------------------ */
 .leistungen-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 30px;
-  margin-top: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-2xl);
+  margin-top: var(--space-2xl);
 }
 
-
-/* ======================================================
-   3D SERVICE CARD
-====================================================== */
-
+/* ------------------------------------------------------
+   9. 3D SERVICE CARD
+   ------------------------------------------------------ */
 .card {
-
-  background: rgba(255,255,255,0.94);
-  padding: 30px;
-  border-radius: 18px;
-
+  background: rgba(255, 255, 255, 0.94);
+  padding: var(--space-3xl);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
   transform: perspective(900px);
-  transition: all .35s ease;
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.15),
-    0 4px 10px rgba(0,0,0,0.08);
+  transition:
+    transform var(--transition-slow),
+    box-shadow var(--transition-slow);
+  box-shadow: var(--shadow-md), var(--shadow-sm);
 }
-
-
-/* 3D Hover */
 
 .card:hover {
   transform:
@@ -316,44 +322,31 @@ button:hover,
     translateY(-12px)
     rotateX(2deg)
     scale(1.03);
-
-  box-shadow:
-    0 28px 70px rgba(0,0,0,0.28),
-    0 12px 26px rgba(0,0,0,0.18);
+  box-shadow: var(--shadow-lg), 0 12px 26px rgba(0, 0, 0, 0.18);
 }
 
-
-/* ======================================================
-   ICON BOX
-====================================================== */
-
+/* ------------------------------------------------------
+   10. ICON BOX
+   ------------------------------------------------------ */
 .icon {
-
   width: 70px;
   height: 60px;
-
-  background: black;
-  color: #ffcc00;
-
-  border-radius: 14px;
-
+  background: var(--color-black);
+  color: var(--color-brand);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 28px;
-  margin-bottom: 18px;
-
+  margin-bottom: var(--space-lg);
   box-shadow:
-    inset 0 -4px 8px rgba(255,255,255,0.15),
-    0 10px 20px rgba(0,0,0,0.35);
+    inset 0 -4px 8px rgba(255, 255, 255, 0.15),
+    0 10px 20px rgba(0, 0, 0, 0.35);
 }
 
-
-/* ======================================================
-   PREISE
-====================================================== */
-
+/* ------------------------------------------------------
+   11. PREISE
+   ------------------------------------------------------ */
 #preise {
   display: flex;
   flex-direction: column;
@@ -361,123 +354,185 @@ button:hover,
 }
 
 .price-note {
-  background: #f3f4f6;
-  padding: 14px 20px;
-  border-radius: 10px;
+  background: var(--color-bg-gray);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
   font-size: 18px;
 }
 
-
-/* ======================================================
-   VORTEILE
-====================================================== */
-
+/* ------------------------------------------------------
+   12. VORTEILE
+   ------------------------------------------------------ */
 #vorteile {
-  background: #ffcc00;
-  color: black;
+  background: var(--color-brand);
+  color: var(--color-black);
 }
 
 .vorteile-grid {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 28px;
-  margin-top: 40px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
 }
 
 .vorteil {
-  background: white;
-  padding: 24px;
-  border-radius: 14px;
+  background: var(--color-white);
+  padding: var(--space-xl);
+  border-radius: var(--radius-md);
 }
 
-
-/* ======================================================
-   KONTAKT
-====================================================== */
-
+/* ------------------------------------------------------
+   13. KONTAKT
+   ------------------------------------------------------ */
 .kontakt-grid {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 28px;
-  margin-top: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
 }
 
 .kontakt-card {
-  background: #f9fafb;
-  padding: 24px;
-  border-radius: 14px;
+  background: var(--color-bg-light);
+  padding: var(--space-xl);
+  border-radius: var(--radius-md);
 }
 
-
-/* ======================================================
-   FOOTER
-====================================================== */
-
+/* ------------------------------------------------------
+   14. FOOTER
+   ------------------------------------------------------ */
 footer {
-  background: #0f172a;
-  color: #cbd5e1;
+  background: var(--color-dark-bg);
+  color: var(--color-text-muted);
   text-align: center;
-  padding: 40px 20px;
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 .socials a {
-  margin: 0 10px;
   font-size: 22px;
   text-decoration: none;
+  transition: transform var(--transition-fast);
 }
 
+.socials a:hover {
+  transform: scale(1.2);
+}
 
-/* ======================================================
-   SCROLL TOP BUTTON — 3D
-====================================================== */
-
+/* ------------------------------------------------------
+   15. SCROLL-TOP BUTTON
+   ------------------------------------------------------ */
 .scroll-top-btn {
-
   position: fixed;
-  right: 20px;
-  bottom: 24px;
-
+  right: var(--space-lg);
+  bottom: var(--space-xl);
   width: 52px;
   height: 52px;
-
   border-radius: 50%;
   font-size: 22px;
-
-  background: #ffcc00;
-  color: black;
-
+  background: var(--color-brand);
+  color: var(--color-black);
   box-shadow:
-    0 8px 0 #b38a00,
-    0 16px 24px rgba(0,0,0,0.35);
-
+    0 8px 0 var(--color-brand-shadow),
+    0 16px 24px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   border: none;
-  z-index: 9999; 
-  /* bestimmt welches Element über anderen liegt, 9999 bedeutet leg dieses Element ganz vorne */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .scroll-top-btn:active {
   transform: translateY(4px);
-  box-shadow:
-    0 3px 0 #b38a00;
+  box-shadow: 0 3px 0 var(--color-brand-shadow);
 }
 
+/* ------------------------------------------------------
+   16. DEV BADGE (Fixed)
+   ------------------------------------------------------ */
+.dev-fixed {
+  position: fixed;
+  left: var(--space-sm);
+  bottom: var(--space-sm);
+  width: 165px;
+  padding: var(--space-sm) var(--space-sm);
+  background: rgba(0, 0, 0, 0.88);
+  border: 1px solid rgba(255, 204, 0, 0.55);
+  border-radius: var(--radius-md);
+  font-size: 10.5px;
+  line-height: 1.15;
+  z-index: 999999;
+}
 
-/* ======================================================
-   MOBILE
-====================================================== */
+.dev-fixed * {
+  margin: 0;
+  padding: 0;
+}
 
+.dev-fixed-title {
+  color: #9ca3af;
+  font-size: 10px;
+  opacity: 0.75;
+}
+
+.dev-fixed-name {
+  color: var(--color-brand);
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.dev-fixed-role {
+  color: #a3a3a3;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.dev-fixed-mail {
+  color: #38bdf8;
+  font-size: 10px;
+  margin-top: 4px;
+  display: block;
+  text-decoration: none;
+  transition: text-decoration var(--transition-fast);
+}
+
+.dev-fixed-mail:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------
+   17. RESPONSIVENESS (Mobile First Ergänzungen)
+   ------------------------------------------------------ */
+
+/* Tablet & kleinere Desktops */
+@media (max-width: 1024px) {
+  header {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .hero {
+    min-height: 60vh;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-
   header {
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
+    gap: var(--space-sm);
+    padding: var(--space-md);
   }
 
   nav {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
   }
 
@@ -491,126 +546,47 @@ footer {
   }
 
   section {
-    padding: 50px 16px;
+    padding: 50px var(--space-md);
   }
 
+  .services-area-bg {
+    padding: 60px var(--space-md);
+  }
 }
 
-/* ================= DEV CREDIT ================= */
+/* Kleine Mobile */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 18px;
+  }
 
-/* =========================================
-   DEV BADGE — SMALL CORNER VERSION
-========================================= */
+  .hero-content {
+    padding: var(--space-xl) var(--space-md);
+  }
 
-/* =================================================
-   FIXED DEV SIGNATURE — unten links fest
-================================================= */
+  .leistungen-grid {
+    grid-template-columns: 1fr;
+  }
 
-/* ================= FIXED DEV BADGE — STABIL ================= */
+  .card {
+    padding: var(--space-xl);
+  }
 
-.dev-fixed{
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
-
-  width: 165px;
-  padding: 8px 10px;
-
-  background: rgba(0,0,0,0.88);
-  border: 1px solid rgba(255,204,0,0.55);
-  border-radius: 12px;
-
-  font-size: 10.5px;
-  line-height: 1.15;
-
-  z-index: 999999;
+  .scroll-top-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    right: var(--space-sm);
+    bottom: var(--space-md);
+  }
 }
 
-/* Innenabstände entfernen → kein leerer Raum */
-
-.dev-fixed *{
-  margin: 0;
-  padding: 0;
-}
-
-/* Text fein abstimmen */
-
-.dev-fixed-title{
-  color:#9ca3af;
-  font-size:10px;
-  opacity:.75;
-}
-
-.dev-fixed-name{
-  color:#ffcc00;
-  font-weight:800;
-  margin-top:2px;
-}
-
-.dev-fixed-role{
-  color:#a3a3a3;
-  font-size:10px;
-  margin-top:2px;
-}
-
-.dev-fixed-mail{
-  color:#38bdf8;
-  font-size:10px;
-  margin-top:4px;
-  display:block;
-  text-decoration:none;
-}
-
-@media (max-width: 600px){
-  .dev-fixed{
+/* Dev-Badge Mobile */
+@media (max-width: 600px) {
+  .dev-fixed {
     width: 150px;
     font-size: 9.5px;
     padding: 7px 9px;
   }
 }
 
-.dev-fixed-mail:hover {
-  text-decoration: underline;
-}
-
-
-/* ---------- 3D Hover ---------- */
-
-.dev-badge:hover {
-  transform:
-    perspective(900px)
-    translateY(-4px)
-    scale(1.03)
-    rotateX(2deg);
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,0.6);
-}
-
-
-/* ---------- Text Styles ---------- */
-
-.dev-badge-title {
-  opacity: 0.7;
-}
-
-.dev-badge-name {
-  font-weight: 800;
-  font-size: 13px;
-  color: #ffcc00;
-}
-
-.dev-badge-role {
-  opacity: 0.85;
-  margin-bottom: 6px;
-}
-
-.dev-badge-mail {
-  color: #ffcc00;
-  text-decoration: none;
-  word-break: break-all;
-}
-
-.dev-badge-mail:hover {
-  text-decoration: underline;
-}

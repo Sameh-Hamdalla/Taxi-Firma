@@ -375,11 +375,11 @@ ${text.notes}: ${notes}`;
 
           <div className="wizard-actions">
 
-            <button onClick={() => setStep(1)}>
+            <button className="wizard-btn-back" onClick={() => setStep(1)}>
               {text.back}
             </button>
 
-            <button onClick={sendWhatsApp}>
+            <button className="wizard-btn-next" onClick={sendWhatsApp}>
               {text.send}
             </button>
 
