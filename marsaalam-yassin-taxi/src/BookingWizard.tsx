@@ -77,7 +77,7 @@ type ErrorState = {
  *
  * Final → WhatsApp wird geöffnet
  */
-export default function BookingWizard({  text }: Props) {
+export default function BookingWizard({ open, text }: Props) {
 
   // ---------- Sichtbarkeit ----------
  
@@ -110,7 +110,7 @@ export default function BookingWizard({  text }: Props) {
   // =====================================================
   const [errors, setErrors] = useState<ErrorState>({});
 
-  // if (!open) return null;
+  if (!open) return null;
 
 
   /**

@@ -67,20 +67,35 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: var(--color-white);
   color: var(--color-text);
   line-height: 1.5;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 /* Zentrierte Content-Box in Sections */
 section > * {
   max-width: var(--content-max-width);
   margin-inline: auto;
+}
+
+main > section:not(.hero),
+.services-area-bg > section {
+  padding: var(--space-4xl) var(--space-lg);
 }
 
 /* ------------------------------------------------------
@@ -157,13 +172,22 @@ header h1 {
 }
 
 /* Navigation */
-nav {
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--space-md);
+}
+
+.nav-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: var(--space-lg);
 }
 
-nav a {
+.main-nav a {
   color: var(--color-white);
   text-decoration: none;
   font-size: 15px;
@@ -173,7 +197,7 @@ nav a {
 }
 
 /* Underline-Glow-Effekt */
-nav a::after {
+.nav-links a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -184,11 +208,11 @@ nav a::after {
   transition: width var(--transition-base);
 }
 
-nav a:hover {
+.main-nav a:hover {
   color: var(--color-brand);
 }
 
-nav a:hover::after {
+.nav-links a:hover::after {
   width: 100%;
 }
 
@@ -272,7 +296,7 @@ button:active,
    ------------------------------------------------------ */
 .services-area-bg {
   position: relative;
-  padding: 100px var(--space-lg);
+  padding: 30px 0;
   background: url("./assets/meer.png") center / cover no-repeat;
 }
 
@@ -424,6 +448,41 @@ footer {
   transform: scale(1.2);
 }
 
+.footer-developer {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  width: min(100%, 360px);
+  margin: var(--space-xl) auto 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 204, 0, 0.28);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.footer-developer-label {
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+.footer-developer strong {
+  color: var(--color-brand);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.footer-developer a {
+  color: #dbeafe;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.footer-developer a:hover {
+  color: var(--color-brand);
+}
+
 /* ------------------------------------------------------
    15. SCROLL-TOP BUTTON
    ------------------------------------------------------ */
@@ -457,60 +516,7 @@ footer {
 }
 
 /* ------------------------------------------------------
-   16. DEV BADGE (Fixed)
-   ------------------------------------------------------ */
-.dev-fixed {
-  position: fixed;
-  left: var(--space-sm);
-  bottom: var(--space-sm);
-  width: 165px;
-  padding: var(--space-sm) var(--space-sm);
-  background: rgba(0, 0, 0, 0.88);
-  border: 1px solid rgba(255, 204, 0, 0.55);
-  border-radius: var(--radius-md);
-  font-size: 10.5px;
-  line-height: 1.15;
-  z-index: 999999;
-}
-
-.dev-fixed * {
-  margin: 0;
-  padding: 0;
-}
-
-.dev-fixed-title {
-  color: #9ca3af;
-  font-size: 10px;
-  opacity: 0.75;
-}
-
-.dev-fixed-name {
-  color: var(--color-brand);
-  font-weight: 800;
-  margin-top: 2px;
-}
-
-.dev-fixed-role {
-  color: #a3a3a3;
-  font-size: 10px;
-  margin-top: 2px;
-}
-
-.dev-fixed-mail {
-  color: #38bdf8;
-  font-size: 10px;
-  margin-top: 4px;
-  display: block;
-  text-decoration: none;
-  transition: text-decoration var(--transition-fast);
-}
-
-.dev-fixed-mail:hover {
-  text-decoration: underline;
-}
-
-/* ------------------------------------------------------
-   17. RESPONSIVENESS (Mobile First Ergänzungen)
+   16. RESPONSIVENESS (Mobile First Ergänzungen)
    ------------------------------------------------------ */
 
 /* Tablet & kleinere Desktops */
@@ -532,11 +538,18 @@ footer {
     padding: var(--space-md);
   }
 
-  nav {
+  .main-nav {
+    width: 100%;
+    align-items: center;
     justify-content: center;
   }
 
-  nav a {
+  .nav-links {
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .main-nav a {
     margin: 6px 10px;
   }
 
@@ -545,12 +558,13 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  section {
+  main > section:not(.hero),
+  .services-area-bg > section {
     padding: 50px var(--space-md);
   }
 
   .services-area-bg {
-    padding: 60px var(--space-md);
+    padding: 10px 0;
   }
 }
 
@@ -580,13 +594,3 @@ footer {
     bottom: var(--space-md);
   }
 }
-
-/* Dev-Badge Mobile */
-@media (max-width: 600px) {
-  .dev-fixed {
-    width: 150px;
-    font-size: 9.5px;
-    padding: 7px 9px;
-  }
-}
-

@@ -83,10 +83,12 @@ function App() {
         <h1>{text.title}</h1>
 
         {/* Navigation */}
-        <nav>
-          <a href="#leistungen">{text.nav.leistungen}</a>
-          <a href="#preise">{text.nav.preise}</a>
-          <a href="#kontakt">{text.nav.kontakt}</a>
+        <nav className="main-nav" aria-label="Hauptnavigation">
+          <div className="nav-links">
+            <a href="#leistungen">{text.nav.leistungen}</a>
+            <a href="#preise">{text.nav.preise}</a>
+            <a href="#kontakt">{text.nav.kontakt}</a>
+          </div>
         </nav>
 
         {/* Sprachumschalter */}
@@ -273,20 +275,19 @@ function App() {
           <a href="#">📷</a>
           <a href="#">🐦</a>
         </div>
+
+        <div className="footer-developer" aria-label="Entwickler Kontakt">
+          <span className="footer-developer-label">Developed by</span>
+          <strong>Hamdalla web</strong>
+          <a href="https://www.hamdalla-web.com" target="_blank" rel="noopener noreferrer">
+            www.hamdalla-web.com
+          </a>
+          <a href="mailto:info@hamdalla-web.com">
+            info@hamdalla-web.com
+          </a>
+        </div>
     
       </footer>
-      {/* ================= DEV BADGE ================= */}  
-
-      {/* DEV BADGE FIXED */}
-      <div className="dev-fixed">
-        <div className="dev-fixed-title">Developed by</div>
-        <div className="dev-fixed-name">Sameh Hamdalla</div>
-        <div className="dev-fixed-role">Software Development</div>
-
-        <a href="mailto:sa_mh87@outlook.de" className="dev-fixed-mail">
-          sa_mh87@outlook.de
-        </a>
-      </div>   
 
     </>
   );
